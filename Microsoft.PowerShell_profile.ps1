@@ -26,28 +26,28 @@ if (Get-Command -Name "nvim" -ErrorAction SilentlyContinue) {
 }
 
 # PROMPT
-function prompt {
-    $success = $Global:?
-
-    $path = $Pwd.Path
-    if ($path.StartsWith($HOME)) {
-        $path = "~" + $path.Substring($HOME.Length)
-    }
-    $Host.UI.RawUI.WindowTitle = $path
-
-    $prompt += "`n"
-    $prompt += "$($PSStyle.Bold)$($PSStyle.Foreground.Cyan)$path$($PSStyle.Reset)"
-    $prompt += "`n"
-
-    if ($success) {
-        $prompt += "$($PSStyle.Foreground.Green)❯"
-    } else {
-        $prompt += "$($PSStyle.Foreground.Red)❯"
-    }
-    $prompt += "$($PSStyle.Reset) "
-
-    return $prompt
-}
+# function prompt {
+#     $success = $Global:?
+#
+#     $path = $Pwd.Path
+#     if ($path.StartsWith($HOME)) {
+#         $path = "~" + $path.Substring($HOME.Length)
+#     }
+#     $Host.UI.RawUI.WindowTitle = $path
+#
+#     $prompt += "`n"
+#     $prompt += "$($PSStyle.Bold)$($PSStyle.Foreground.Cyan)$path$($PSStyle.Reset)"
+#     $prompt += "`n"
+#
+#     if ($success) {
+#         $prompt += "$($PSStyle.Foreground.Green)❯"
+#     } else {
+#         $prompt += "$($PSStyle.Foreground.Red)❯"
+#     }
+#     $prompt += "$($PSStyle.Reset) "
+#
+#     return $prompt
+# }
 
 # STARSHIP
 . "$HOME/Documents/PowerShell/Starship/Starship.ps1"
