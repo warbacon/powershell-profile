@@ -5,12 +5,19 @@ Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
-# COLORS
-$PSStyle.FileInfo.Directory="$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
-
 # ALIASES
 function .. { Set-Location .. }
 function ex { explorer.exe . }
+
+if (Get-Command -Name "eza" -ErrorAction SilentlyContinue) {
+    del alias:ls
+    function ls { eza --icons --group-directories-first $args }
+    function ll { ls -lh --git }
+    function la { ls -a }
+    function lla { ls -lha --git }
+} else {
+    $PSStyle.FileInfo.Directory="$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
+}
 
 if (Get-Command -Name "fastfetch" -ErrorAction SilentlyContinue) {
     Set-Alias ffetch fastfetch
