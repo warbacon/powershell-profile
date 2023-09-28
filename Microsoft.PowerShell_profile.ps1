@@ -1,3 +1,17 @@
+# UTILITIES --------------------------------------------------------------------
+function Test-CommandExists {
+    Param ($command)
+    $oldPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'SilentlyContinue'
+    try { if (Get-Command $command) { RETURN $true } }
+    Catch { Write-Host "$command does not exist"; RETURN $false }
+    Finally { $ErrorActionPreference = $oldPreference }
+}
+
+function Get-PublicIP {
+    (Invoke-WebRequest http://ifconfig.me/ip).Content
+}
+
 # KEYBINDINGS ------------------------------------------------------------------
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
@@ -9,11 +23,11 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 function .. { Set-Location .. }
 function ex { explorer.exe . }
 
-if (Get-Command -Name "fastfetch" -ErrorAction SilentlyContinue) {
-    Set-Alias ffetch fastfetch
+if (Test-CommandExists fastfetch) {
+    Set-Alias -Name ffetch -Value fastfetch
 }
 
-if (Get-Command -Name "eza" -ErrorAction SilentlyContinue) {
+if (Test-CommandExists eza) {
     del alias:ls
     function ls { eza --icons --group-directories-first $args }
     function ll { ls -lh --git }
@@ -24,7 +38,7 @@ if (Get-Command -Name "eza" -ErrorAction SilentlyContinue) {
 }
 
 # NEOVIM CURSOR FIX ------------------------------------------------------------
-if (Get-Command -Name "nvim" -ErrorAction SilentlyContinue) {
+if (Test-CommandExists nvim) {
     $nvimPath = (Get-Command nvim).Source
     function nvim {
         & $nvimPath $args
@@ -33,7 +47,7 @@ if (Get-Command -Name "nvim" -ErrorAction SilentlyContinue) {
 }
 
 # PROMPT -----------------------------------------------------------------------
-if (Get-Command -Name "starship" -ErrorAction SilentlyContinue) {
+if (Test-CommandExists starship) {
 
     ## CONFIGURE AND START STARSHIP
     $ENV:STARSHIP_CONFIG = "$HOME/Documents/PowerShell/starship.toml"
