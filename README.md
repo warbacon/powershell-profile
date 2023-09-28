@@ -25,7 +25,7 @@ The easiest way to install it is to use [scoop](scoop.sh).
 You can install scoop using:
 
 ```powershell
-Set-ExecutionPolicy RemoteSigned -Scope Process
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 irm get.scoop.sh | iex
 ```
 
