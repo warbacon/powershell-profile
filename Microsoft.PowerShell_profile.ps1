@@ -50,7 +50,9 @@ if (Test-CommandExists nvim) {
 if (Test-CommandExists starship) {
 
     ## CONFIGURE AND START STARSHIP
-    $ENV:STARSHIP_CONFIG = "$HOME/Documents/PowerShell/starship.toml"
+    $ENV:STARSHIP_CONFIG = "$HOME\Documents\PowerShell\starship.toml"
+    $ENV:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
+
     Invoke-Expression (&starship init powershell)
 
     function Invoke-Starship-PreCommand {
