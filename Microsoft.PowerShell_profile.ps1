@@ -59,7 +59,7 @@ if (Test-CommandExists starship) {
         if ($PWD.Path.StartsWith($HOME)) {
             $host.ui.RawUI.WindowTitle = "~$($PWD.Path.Substring($HOME.Length))"
         } else {
-            $host.ui.RawUI.WindowTitle = "$PWD.Path"
+            $host.ui.RawUI.WindowTitle = "$PWD"
         }
     }
 
