@@ -12,6 +12,9 @@ function Get-PublicIP {
     (Invoke-WebRequest http://ifconfig.me/ip).Content
 }
 
+# APPEARANCE -------------------------------------------------------------------
+$PSStyle.FileInfo.Directory="$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
+
 # KEYBINDINGS ------------------------------------------------------------------
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
@@ -27,15 +30,6 @@ if (Test-CommandExists fastfetch) {
     Set-Alias -Name ffetch -Value fastfetch
 }
 
-if (Test-CommandExists eza) {
-    del alias:ls
-    function ls { eza --icons --group-directories-first $args }
-    function ll { ls -lh --git }
-    function la { ls -a }
-    function lla { ls -lha --git }
-} else {
-    $PSStyle.FileInfo.Directory="$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
-}
 
 # NEOVIM CURSOR FIX ------------------------------------------------------------
 if (Test-CommandExists nvim) {

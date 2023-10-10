@@ -18,23 +18,6 @@ Or by going to <https://git-scm.com/download/win>.
 winget install starship
 ```
 
-### Eza (optional)
-
-The easiest way to install it is to use [scoop](scoop.sh).
-
-You can install scoop using:
-
-```powershell
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-irm get.scoop.sh | iex
-```
-
-And then install eza using:
-
-```sh
-scoop install eza
-```
-
 ## Installation
 
 ```sh
