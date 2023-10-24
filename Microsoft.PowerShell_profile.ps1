@@ -30,6 +30,7 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 # ALIASES ----------------------------------------------------------------------
 function .. { Set-Location .. }
 function ex { explorer.exe . }
+Set-Alias -Name touch -Value New-Item
 
 if (Test-CommandExists fastfetch) {
     Set-Alias -Name ffetch -Value fastfetch
