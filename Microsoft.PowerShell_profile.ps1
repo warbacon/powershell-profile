@@ -15,9 +15,9 @@ function Get-PublicIP {
 # APPEARANCE -------------------------------------------------------------------
 $PSStyle.FileInfo.Directory="$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
-  Parameter  = "Blue"
-  Operator = "Blue"
-  InlinePrediction = "DarkGray"
+    Parameter  = "Blue"
+    Operator = "Blue"
+    InlinePrediction = "DarkGray"
 }
 
 # KEYBINDINGS ------------------------------------------------------------------
