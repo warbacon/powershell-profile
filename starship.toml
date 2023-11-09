@@ -15,13 +15,18 @@ $line_break\
 $jobs\
 $character"""
 
-[conda]
-symbol = ''
-format = '[\($environment\)]($style) '
-
 [directory]
 read_only = ' 󰌾'
 truncation_length = 0
 
-[git_status]
-windows_starship = '/mnt/c/Program Files/starship/bin/starship.exe'
+# [git_status]
+# windows_starship = '/mnt/c/Program Files/starship/bin/starship.exe'
+
+# [conda]
+# symbol = ''
+# format = '[\($environment\)]($style) '
+
+# [character]
+# success_symbol = '[](bold yellow)'
+# error_symbol = '[](bold red)'
+
