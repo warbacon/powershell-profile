@@ -1,11 +1,14 @@
+# DISABLE STARSHIP -------------------------------------------------------------
+$STARSHIP_DISABLED = $false
+
 # UTILITIES --------------------------------------------------------------------
 function Test-CommandExists {
-    Param ($command)
-    $oldPreference = $ErrorActionPreference
-    $ErrorActionPreference = 'SilentlyContinue'
-    try { if (Get-Command $command) { RETURN $true } }
-    Catch { Write-Host "$command does not exist"; RETURN $false }
-    Finally { $ErrorActionPreference = $oldPreference }
+    param ($command)
+    if (Get-Command $command -ErrorAction SilentlyContinue) {
+        return $true
+    } else {
+        return $false
+    }
 }
 
 function Get-PublicIP {
@@ -33,11 +36,7 @@ Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 function .. { Set-Location .. }
 function ex { explorer.exe . }
 Set-Alias -Name touch -Value New-Item
-
-if (Test-CommandExists fastfetch) {
-    Set-Alias -Name ffetch -Value fastfetch
-}
-
+Set-Alias -Name which -Value Get-Command
 
 # NEOVIM CURSOR FIX ------------------------------------------------------------
 if (Test-CommandExists nvim) {
@@ -49,8 +48,7 @@ if (Test-CommandExists nvim) {
 }
 
 # PROMPT -----------------------------------------------------------------------
-if (Test-CommandExists starship) {
-
+if ((Test-CommandExists starship) -and (-not $STARSHIP_DISABLED)) {
     ## CONFIGURE AND START STARSHIP
     $ENV:STARSHIP_CONFIG = "$HOME\Documents\PowerShell\starship.toml"
     $ENV:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
@@ -64,9 +62,7 @@ if (Test-CommandExists starship) {
             $host.ui.RawUI.WindowTitle = "$PWD"
         }
     }
-
 } else {
-
     ## SIMPLE AND FAST PROMPT
     function prompt {
         $success = $Global:?
@@ -90,5 +86,4 @@ if (Test-CommandExists starship) {
 
         return $prompt
     }
-
 }
