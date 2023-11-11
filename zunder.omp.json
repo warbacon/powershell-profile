@@ -2,7 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
     "version": 2,
     "final_space": true,
-    "console_title_template": "{{.Shell}} in {{.Folder}}",
+    "console_title_template": "{{.PWD}}",
     "blocks": [
         {
             "type": "prompt",
@@ -15,7 +15,7 @@
                     "foreground": "cyan",
                     "template": "<b>{{ .Path }}{{ if not .Writable }} <red>󰌾</>{{ end }}<b/>",
                     "properties": {
-                        "style": "agnoster_full"
+                        "style": "full"
                     }
                 },
                 {
@@ -25,11 +25,14 @@
                     "properties": {
                         "fetch_status": true,
                         "fetch_stash_count": true,
-                        "branch_icon": " ",
-                        "untracked_modes": {
-                            "/Users/user/Projects/oh-my-posh/": "no"
-                        }
+                        "branch_icon": " "
                     }
+                },
+                {
+                    "type": "text",
+                    "style": "plain",
+                    "foreground": "green",
+                    "template": "{{ if .Env.CONDA_DEFAULT_ENV }} <b>({{ .Env.CONDA_DEFAULT_ENV }})<b/>{{ end }}"
                 },
                 {
                     "type": "executiontime",

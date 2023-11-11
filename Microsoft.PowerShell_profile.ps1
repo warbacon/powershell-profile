@@ -46,7 +46,7 @@ if (Test-CommandExists nvim) {
 }
 
 # PROMPT -----------------------------------------------------------------------
-oh-my-posh init pwsh --config "$HOME/Documents/Powershell/thunder.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$HOME/Documents/Powershell/zunder.omp.json" | Invoke-Expression
 # if ((Test-CommandExists starship) -and (-not $STARSHIP_DISABLED)) {
 #     ## CONFIGURE AND START STARSHIP
 #     $ENV:STARSHIP_CONFIG = "$HOME\Documents\PowerShell\starship.toml"
