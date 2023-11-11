@@ -3,6 +3,10 @@
     "version": 2,
     "final_space": true,
     "console_title_template": "{{.PWD}}",
+        "secondary_prompt": {
+        "foreground": "black",
+        "template": "· "
+    },
     "blocks": [
         {
             "type": "prompt",
@@ -10,10 +14,16 @@
             "newline": true,
             "segments": [
                 {
+                    "type": "text",
+                    "style": "plain",
+                    "foreground": "yellow",
+                    "template": "{{ if .WSL }}<b>WSL</b> {{ end }}"
+                },
+                {
                     "type": "path",
                     "style": "plain",
                     "foreground": "cyan",
-                    "template": "<b>{{ .Path }}{{ if not .Writable }} <red>󰌾</>{{ end }}<b/>",
+                    "template": "<b>{{ .Path }}{{ if not .Writable }} <red>󰌾</>{{ end }}</b>",
                     "properties": {
                         "style": "full"
                     }
@@ -21,23 +31,27 @@
                 {
                     "type": "git",
                     "style": "plain",
-                    "template": " on <b><magenta>{{ .HEAD }}</>{{ if .Working.Changed }} <red>{{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <blue>{{ .Staging.String }}</>{{ end }}<b/>",
+                    "template": " on <b><magenta>{{ .HEAD }}</>{{ if .Working.Changed }} <red>{{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <blue>{{ .Staging.String }}</>{{ end }}</b>",
                     "properties": {
                         "fetch_status": true,
-                        "fetch_stash_count": true,
-                        "branch_icon": " "
+                        "branch_icon": "\ue0a0 "
                     }
                 },
                 {
-                    "type": "text",
+                    "type": "python",
                     "style": "plain",
                     "foreground": "green",
-                    "template": "{{ if .Env.CONDA_DEFAULT_ENV }} <b>({{ .Env.CONDA_DEFAULT_ENV }})<b/>{{ end }}"
+                    "template": " <b>({{ if .Venv }}{{ .Venv }}{{ end }})</b>",
+                    "properties": {
+                      "fetch_version": false,
+                      "home_enabled": true,
+                      "display_default": false
+                    }
                 },
                 {
                     "type": "executiontime",
                     "style": "plain",
-                    "template": " took <b><yellow>{{ .FormattedMs }}</><b/>",
+                    "template": " took <b><yellow>{{ .FormattedMs }}</></b>",
                     "properties": {
                         "threshold": 3000,
                         "style": "round"
@@ -57,7 +71,7 @@
                     "foreground_templates": [
                         "{{ if gt .Code 0 }}red{{ end }}"
                     ],
-                    "template": "❯"
+                    "template": "\u276f"
                 }
             ]
         }
