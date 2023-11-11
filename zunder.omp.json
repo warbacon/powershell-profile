@@ -38,15 +38,10 @@
                     }
                 },
                 {
-                    "type": "python",
+                    "type": "text",
                     "style": "plain",
                     "foreground": "green",
-                    "template": " <b>({{ if .Venv }}{{ .Venv }}{{ end }})</b>",
-                    "properties": {
-                      "fetch_version": false,
-                      "home_enabled": true,
-                      "display_default": false
-                    }
+                    "template": "{{ if .Env.CONDA_DEFAULT_ENV }} <b>({{ .Env.CONDA_DEFAULT_ENV }})</b>{{ end }}"
                 },
                 {
                     "type": "executiontime",
