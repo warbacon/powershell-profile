@@ -14,12 +14,6 @@
             "newline": true,
             "segments": [
                 {
-                    "type": "text",
-                    "style": "plain",
-                    "foreground": "yellow",
-                    "template": "{{ if .WSL }}<b>WSL</b> {{ end }}"
-                },
-                {
                     "type": "path",
                     "style": "plain",
                     "foreground": "cyan",
@@ -36,12 +30,6 @@
                         "fetch_status": true,
                         "branch_icon": "\ue0a0 "
                     }
-                },
-                {
-                    "type": "text",
-                    "style": "plain",
-                    "foreground": "green",
-                    "template": "{{ if .Env.CONDA_DEFAULT_ENV }} <b>({{ .Env.CONDA_DEFAULT_ENV }})</b>{{ end }}"
                 },
                 {
                     "type": "executiontime",
