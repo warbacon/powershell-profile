@@ -36,6 +36,7 @@ function nvim {
 # OH-MY-POSH -------------------------------------------------------------------
 try {
     oh-my-posh init pwsh --config "$HOME/Documents/Powershell/zunder.omp.json" | Invoke-Expression
+    $env:POSH_GIT_ENABLED = $true
 }
 catch {
     function prompt {

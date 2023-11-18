@@ -25,10 +25,9 @@
                 {
                     "type": "git",
                     "style": "plain",
-                    "template": " on <b><magenta>{{ .HEAD }}</>{{ if .Working.Changed }} <red>{{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <blue>{{ .Staging.String }}</>{{ end }}</b>",
+                    "template": " on <b><magenta>{{ .HEAD }}</></b>{{ if .Working.Changed }} <red>{{ .Working.String }}</>{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} <blue>{{ .Staging.String }}</>{{ end }}",
                     "properties": {
-                        "fetch_status": true,
-                        "branch_icon": "\ue0a0 "
+                        "branch_icon": " "
                     }
                 },
                 {
