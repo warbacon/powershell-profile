@@ -11,7 +11,8 @@ Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+# Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # ALIASES ----------------------------------------------------------------------
 function .. { Set-Location .. }
