@@ -1,27 +1,26 @@
 # APPEARANCE -------------------------------------------------------------------
-$PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
+$PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSstyle.Foreground.Blue)"
+
+# PSREADLINE -------------------------------------------------------------------
+Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
+Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
+Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineOption -PredictionSource none
 Set-PSReadLineOption -Colors @{
     Parameter        = "Blue"
     Operator         = "Blue"
     InlinePrediction = "DarkGray"
 }
 
-# KEYBINDINGS ------------------------------------------------------------------
-Set-PSReadLineOption -EditMode Emacs
-Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
-Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
-Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
-# Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-# Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-
 # ALIASES ----------------------------------------------------------------------
+Set-Alias -Name touch -Value New-Item
 function .. { Set-Location .. }
 function ex { explorer.exe . }
-function where {
-    Param([Parameter(Mandatory = $true)] [String]$cmd)
-    return (Get-Command $cmd).Source
-}
-Set-Alias -Name touch -Value New-Item
 
 # NEOVIM CURSOR FIX ------------------------------------------------------------
 function nvim {
@@ -34,9 +33,9 @@ function nvim {
     }
 }
 
-# OH-MY-POSH -------------------------------------------------------------------
+# PROMPT -----------------------------------------------------------------------
 try {
-    oh-my-posh init pwsh --config "$HOME/Documents/Powershell/zunder.omp.json" | Invoke-Expression
+    oh-my-posh init pwsh --config "$HOME/Documents/Powershell/thundership.omp.json" | Invoke-Expression
     $env:POSH_GIT_ENABLED = $true
 }
 catch {
