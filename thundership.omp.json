@@ -3,7 +3,7 @@
     "version": 2,
     "final_space": true,
     "console_title_template": "{{.PWD}}",
-        "secondary_prompt": {
+    "secondary_prompt": {
         "foreground": "black",
         "template": "· "
     },
