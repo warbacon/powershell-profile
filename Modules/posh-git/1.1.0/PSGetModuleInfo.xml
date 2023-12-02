@@ -25,7 +25,7 @@
       <S N="Copyright">(c) 2010-2021 Keith Dahlby, Keith Hill, and contributors</S>
       <DT N="PublishedDate">2022-03-31T15:51:47+02:00</DT>
       <Obj N="InstalledDate" RefId="2">
-        <DT>2023-11-18T17:56:03.9050168+01:00</DT>
+        <DT>2023-12-02T17:16:17.8601063+01:00</DT>
         <MS>
           <Obj N="DisplayHint" RefId="3">
             <TN RefId="2">
@@ -63,7 +63,7 @@
         </TN>
         <DCT>
           <En>
-            <S N="Key">Command</S>
+            <S N="Key">Function</S>
             <Obj N="Value" RefId="6">
               <TNRef RefId="1" />
               <LST>
@@ -94,18 +94,14 @@
             </Obj>
           </En>
           <En>
-            <S N="Key">Cmdlet</S>
+            <S N="Key">Workflow</S>
             <Obj N="Value" RefId="7">
               <TNRef RefId="1" />
               <LST />
             </Obj>
           </En>
           <En>
-            <S N="Key">Workflow</S>
-            <Ref N="Value" RefId="7" />
-          </En>
-          <En>
-            <S N="Key">RoleCapability</S>
+            <S N="Key">Cmdlet</S>
             <Ref N="Value" RefId="7" />
           </En>
           <En>
@@ -113,7 +109,11 @@
             <Ref N="Value" RefId="7" />
           </En>
           <En>
-            <S N="Key">Function</S>
+            <S N="Key">RoleCapability</S>
+            <Ref N="Value" RefId="7" />
+          </En>
+          <En>
+            <S N="Key">Command</S>
             <Obj N="Value" RefId="8">
               <TNRef RefId="1" />
               <LST>
@@ -166,15 +166,15 @@
           <S N="releaseNotes">https://github.com/dahlbyk/posh-git/blob/v1.1.0/CHANGELOG.md</S>
           <S N="isLatestVersion">True</S>
           <S N="isAbsoluteLatestVersion">True</S>
-          <S N="versionDownloadCount">569979</S>
-          <S N="downloadCount">1664351</S>
+          <S N="versionDownloadCount">580311</S>
+          <S N="downloadCount">1674816</S>
           <S N="packageSize">45348</S>
           <S N="published">31/03/2022 15:51:47 +02:00</S>
           <S N="created">31/03/2022 15:51:47 +02:00</S>
-          <S N="lastUpdated">18/11/2023 16:41:02 +01:00</S>
+          <S N="lastUpdated">02/12/2023 16:13:49 +01:00</S>
           <S N="tags">git prompt tab tab-completion tab-expansion tabexpansion PSEdition_Core PSModule PSFunction_Add-PoshGitToProfile PSCommand_Add-PoshGitToProfile PSFunction_Expand-GitCommand PSCommand_Expand-GitCommand PSFunction_Format-GitBranchName PSCommand_Format-GitBranchName PSFunction_Get-GitBranchStatusColor PSCommand_Get-GitBranchStatusColor PSFunction_Get-GitStatus PSCommand_Get-GitStatus PSFunction_Get-GitDirectory PSCommand_Get-GitDirectory PSFunction_Get-PromptConnectionInfo PSCommand_Get-PromptConnectionInfo PSFunction_Get-PromptPath PSCommand_Get-PromptPath PSFunction_New-GitPromptSettings PSCommand_New-GitPromptSettings PSFunction_Remove-GitBranch PSCommand_Remove-GitBranch PSFunction_Remove-PoshGitFromProfile PSCommand_Remove-PoshGitFromProfile PSFunction_Update-AllBranches PSCommand_Update-AllBranches PSFunction_Write-GitStatus PSCommand_Write-GitStatus PSFunction_Write-GitBranchName PSCommand_Write-GitBranchName PSFunction_Write-GitBranchStatus PSCommand_Write-GitBranchStatus PSFunction_Write-GitIndexStatus PSCommand_Write-GitIndexStatus PSFunction_Write-GitStashCount PSCommand_Write-GitStashCount PSFunction_Write-GitWorkingDirStatus PSCommand_Write-GitWorkingDirStatus PSFunction_Write-GitWorkingDirStatusSummary PSCommand_Write-GitWorkingDirStatusSummary PSFunction_Write-Prompt PSCommand_Write-Prompt PSFunction_Write-VcsStatus PSCommand_Write-VcsStatus PSFunction_TabExpansion PSCommand_TabExpansion PSFunction_tgit PSCommand_tgit PSIncludes_Function</S>
           <S N="developmentDependency">False</S>
-          <S N="updated">2023-11-18T16:41:02Z</S>
+          <S N="updated">2023-12-02T16:13:49Z</S>
           <S N="NormalizedVersion">1.1.0</S>
           <S N="Authors">Keith Dahlby Keith Hill and contributors</S>
           <S N="IsPrerelease">false</S>
