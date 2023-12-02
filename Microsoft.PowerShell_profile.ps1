@@ -16,7 +16,7 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineOption -Colors @{
     Parameter        = "Blue"
     Operator         = "Blue"
-    InlinePrediction = "DarkGray"
+    InlinePrediction = "`e[90;3m"
 }
 
 # ALIASES ----------------------------------------------------------------------
