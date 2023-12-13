@@ -53,7 +53,7 @@
                     "foreground_templates": [
                         "{{ if gt .Code 0 }}red{{ end }}"
                     ],
-                    "template": "\u276f"
+                    "template": "<b>></>"
                 }
             ]
         }
