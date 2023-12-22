@@ -1,6 +1,3 @@
-# WINDOWS TERMINAL -------------------------------------------------------------
-$env:WT_CONFIG = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-
 # APPEARANCE -------------------------------------------------------------------
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSstyle.Foreground.Blue)"
 
@@ -38,6 +35,9 @@ function nvim {
 # PROMPT -----------------------------------------------------------------------
 try {
     oh-my-posh init pwsh --config "$HOME/Documents/Powershell/thundership.omp.json" | Invoke-Expression
+    if (-Not (Test-Path -Path "$HOME/Documents/Powershell/Modules/posh-git")) {
+        Install-Module posh-git -Scope CurrentUser -Force
+    }
     $env:POSH_GIT_ENABLED = $true
 }
 catch {
