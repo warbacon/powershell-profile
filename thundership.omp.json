@@ -4,7 +4,7 @@
     "final_space": true,
     "console_title_template": "{{.PWD}}",
     "secondary_prompt": {
-        "foreground": "black",
+        "foreground": "darkGray",
         "template": "· "
     },
     "blocks": [
