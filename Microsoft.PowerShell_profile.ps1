@@ -18,41 +18,20 @@ Set-PSReadLineOption -Colors @{
 
 # ALIASES ----------------------------------------------------------------------
 Set-Alias -Name touch -Value New-Item
+Set-Alias -Name ex -Value explorer.exe
 function .. { Set-Location .. }
-function ex { explorer.exe . }
 
 # NEOVIM CURSOR FIX ------------------------------------------------------------
-function nvim {
-    try {
+if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
+    function nvim {
         nvim.exe $args
         [Console]::Write("`e[0 q")
-    }
-    catch {
-        Write-Host "Neovim isn't available."
     }
 }
 
 # PROMPT -----------------------------------------------------------------------
 try {
-    oh-my-posh init pwsh --config "$HOME/Documents/Powershell/thundership.omp.json" | Invoke-Expression
+    $OMP_THEME = "$HOME\Documents\Powershell\thundership.omp.json"
+    oh-my-posh init pwsh --config $OMP_THEME | Invoke-Expression
 }
-catch {
-    function prompt {
-        if ($?) {
-            $characterColor = "$($PSStyle.Foreground.Green)"
-        }
-        else {
-            $characterColor = "$($PSStyle.Foreground.Red)"
-        }
-
-        $character = "$characterColor`u{276f}$($PSStyle.Reset)"
-
-        $currentDirectory = "$($PSStyle.Foreground.Cyan)" + $PWD.Path.Replace($HOME, "~") + "$($PSStyle.Reset)"
-
-        if (Invoke-Expression "git rev-parse --is-inside-work-tree") {
-            $branch = " on $($PSStyle.Foreground.Cyan)$($PSStyle.Bold)$(Invoke-Expression "git branch --show-current")$($PSStyle.Reset)"
-        }
-
-        return "`n$currentDirectory$branch`n$character "
-    }
-}
+catch {}
