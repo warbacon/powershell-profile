@@ -30,8 +30,7 @@ if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
 }
 
 # PROMPT -----------------------------------------------------------------------
-try {
-    $OMP_THEME = "$HOME\Documents\Powershell\thundership.omp.json"
-    oh-my-posh init pwsh --config $OMP_THEME | Invoke-Expression
-}
-catch {}
+$ErrorActionPreference = 'SilentlyContinue'
+$OMP_THEME = "$HOME\Documents\Powershell\thundership.omp.json"
+oh-my-posh init pwsh --config $OMP_THEME | Invoke-Expression
+$ErrorActionPreference = 'Continue'
