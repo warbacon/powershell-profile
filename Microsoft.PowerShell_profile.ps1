@@ -29,8 +29,20 @@ if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
     }
 }
 
-# PROMPT -----------------------------------------------------------------------
-$ErrorActionPreference = 'SilentlyContinue'
-$OMP_THEME = "$HOME\Documents\Powershell\thundership.omp.json"
-oh-my-posh init pwsh --config $OMP_THEME | Invoke-Expression
-$ErrorActionPreference = 'Continue'
+# STARSHIP ---------------------------------------------------------------------
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    function Invoke-Starship-PreCommand {
+        if ($Global:notFirstTime) {
+            Write-Host
+        }
+        else {
+            $Global:notFirstTime = $true
+        }
+        $host.ui.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
+    }
+
+    $ENV:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
+    $ENV:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
+
+    Invoke-Expression (&starship init powershell --print-full-init | Out-String)
+}

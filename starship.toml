@@ -1,0 +1,29 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+$username\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$cmd_duration\
+$jobs\
+$line_break\
+$character"""
+
+[character]
+success_symbol = '[>](bold green)'
+error_symbol = '[>](bold red)'
+vimcmd_symbol = '[<](bold green)'
+vimcmd_replace_one_symbol = '[<](bold purple)'
+vimcmd_replace_symbol = '[<](bold purple)'
+vimcmd_visual_symbol = '[<](bold yellow)'
+
+[directory]
+read_only = ' 󰌾'
+truncation_length = 0
