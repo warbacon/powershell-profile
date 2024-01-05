@@ -1,15 +1,13 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = false
+# add_newline = false
 
 format = """
-$username\
 $directory\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
 $cmd_duration\
 $jobs\
@@ -27,3 +25,7 @@ vimcmd_visual_symbol = '[<](bold yellow)'
 [directory]
 read_only = ' 󰌾'
 truncation_length = 0
+
+[git_commit]
+tag_disabled = false
+tag_symbol = '  '

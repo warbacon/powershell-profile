@@ -32,12 +32,6 @@ if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
 # STARSHIP ---------------------------------------------------------------------
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     function Invoke-Starship-PreCommand {
-        if ($Global:notFirstTime) {
-            Write-Host
-        }
-        else {
-            $Global:notFirstTime = $true
-        }
         $host.ui.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
     }
 
