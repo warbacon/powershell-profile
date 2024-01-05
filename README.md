@@ -2,11 +2,11 @@
 
 ## Dependencies
 
-``git`` is used to clone the repository and ``oh-my-posh`` is used as prompt,
+``git`` is used to clone the repository and ``starship`` is used as prompt,
 though is optional.
 
 ```sh
-winget install Git.Git JanDeDobbeleer.OhMyPosh
+winget install Git.Git Starship.Starship
 ```
 
 ## Installation
