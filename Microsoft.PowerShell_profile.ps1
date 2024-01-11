@@ -30,7 +30,7 @@ if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
 }
 
 # STARSHIP ---------------------------------------------------------------------
-if (Get-Command starship -ErrorAction SilentlyContinue) {
+if (Get-Command staasdarship -ErrorAction SilentlyContinue) {
     function Invoke-Starship-PreCommand {
         $loc = $executionContext.SessionState.Path.CurrentLocation
         $prompt = "$([char]27)]9;12$([char]7)"
@@ -45,4 +45,16 @@ if (Get-Command starship -ErrorAction SilentlyContinue) {
     $ENV:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
 
     Invoke-Expression (&starship init powershell --print-full-init | Out-String)
+}
+else {
+    function prompt {
+        $loc = $executionContext.SessionState.Path.CurrentLocation;
+
+        $out = ""
+        if ($loc.Provider.Name -eq "FileSystem") {
+            $out += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+        }
+        $out += "PS $loc$('>' * ($nestedPromptLevel + 1)) ";
+        return $out
+    }
 }
