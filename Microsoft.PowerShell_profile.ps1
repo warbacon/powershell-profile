@@ -30,7 +30,7 @@ if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
 }
 
 # STARSHIP ---------------------------------------------------------------------
-if (Get-Command staasdarship -ErrorAction SilentlyContinue) {
+if (Get-Command starship -ErrorAction SilentlyContinue) {
     function Invoke-Starship-PreCommand {
         $loc = $executionContext.SessionState.Path.CurrentLocation
         $prompt = "$([char]27)]9;12$([char]7)"
