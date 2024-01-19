@@ -21,14 +21,6 @@ Set-Alias -Name touch -Value New-Item
 Set-Alias -Name ex -Value explorer.exe
 function .. { Set-Location .. }
 
-# NEOVIM CURSOR FIX ------------------------------------------------------------
-if (Get-Command -ErrorAction SilentlyContinue -Name "nvim.exe") {
-    function nvim {
-        nvim.exe $args
-        [Console]::Write("`e[0 q")
-    }
-}
-
 # STARSHIP ---------------------------------------------------------------------
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     function Invoke-Starship-PreCommand {
