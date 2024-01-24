@@ -17,9 +17,13 @@ Set-PSReadLineOption -Colors @{
 }
 
 # ALIASES ----------------------------------------------------------------------
+function .. { Set-Location .. }
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name ex -Value explorer.exe
-function .. { Set-Location .. }
+
+if (Get-Command lazygit -ErrorAction SilentlyContinue) {
+    Set-Alias -Name lg -Value lazygit.exe
+}
 
 # STARSHIP ---------------------------------------------------------------------
 if (Get-Command starship -ErrorAction SilentlyContinue) {
