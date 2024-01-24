@@ -11,15 +11,12 @@ $git_status\
 $cmd_duration\
 $jobs\
 $line_break\
+$status\
 $character"""
 
 [character]
-success_symbol = '[>](bold green)'
-error_symbol = '[>](bold red)'
-vimcmd_symbol = '[<](bold green)'
-vimcmd_replace_one_symbol = '[<](bold purple)'
-vimcmd_replace_symbol = '[<](bold purple)'
-vimcmd_visual_symbol = '[<](bold yellow)'
+success_symbol = '❱'
+error_symbol = '[❱](bright-red)'
 
 [directory]
 read_only = ' 󰌾'
@@ -28,3 +25,8 @@ truncation_length = 0
 [git_commit]
 tag_disabled = false
 tag_symbol = '  '
+
+[status]
+disabled = false
+format = '[$status]($style) '
+style = 'bold bright-red'
