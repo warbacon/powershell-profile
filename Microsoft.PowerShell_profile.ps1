@@ -1,7 +1,7 @@
-# APPEARANCE -------------------------------------------------------------------
+# APPEARANCE ------------------------------------------------------------------
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSstyle.Foreground.Blue)"
 
-# PSREADLINE -------------------------------------------------------------------
+# PSREADLINE ------------------------------------------------------------------
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
@@ -16,7 +16,7 @@ Set-PSReadLineOption -Colors @{
     InlinePrediction = "DarkGray"
 }
 
-# ALIASES ----------------------------------------------------------------------
+# ALIASES ---------------------------------------------------------------------
 function .. { Set-Location .. }
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name ex -Value explorer.exe
@@ -25,7 +25,7 @@ if (Get-Command lazygit -ErrorAction SilentlyContinue) {
     Set-Alias -Name lg -Value lazygit.exe
 }
 
-# STARSHIP ---------------------------------------------------------------------
+# STARSHIP --------------------------------------------------------------------
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     function Invoke-Starship-PreCommand {
         $loc = $executionContext.SessionState.Path.CurrentLocation
