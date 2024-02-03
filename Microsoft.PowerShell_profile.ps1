@@ -26,14 +26,18 @@ if (Get-Command lazygit.exe -ErrorAction SilentlyContinue) {
 }
 
 # STARSHIP --------------------------------------------------------------------
+# Do nothing if Starship isn't available.
 if (Get-Command starship.exe -ErrorAction SilentlyContinue) {
+
+    # Set window title
     function Invoke-Starship-PreCommand {
-        $Host.UI.Write($prompt)
         $Host.UI.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
     }
 
+    # Enviromental variables
     $Env:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
     $Env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
 
+    # Start Starship
     Invoke-Expression (&starship init powershell --print-full-init | Out-String)
 }
