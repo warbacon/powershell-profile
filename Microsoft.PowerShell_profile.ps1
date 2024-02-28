@@ -3,7 +3,7 @@ $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSstyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
     Parameter        = "Blue"
     Operator         = "Blue"
-    InlinePrediction = "DarkGray"
+    InlinePrediction = "`e[90;3m"
 }
 
 # KEYBINDINGS -----------------------------------------------------------------
@@ -17,7 +17,9 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 
 # ALIASES ---------------------------------------------------------------------
-function .. { Set-Location .. }
+function .. {
+    Set-Location ..
+}
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name ex -Value explorer.exe
 
