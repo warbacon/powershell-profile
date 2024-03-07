@@ -21,7 +21,6 @@ function .. {
     Set-Location ..
 }
 Set-Alias -Name touch -Value New-Item
-Set-Alias -Name ex -Value explorer.exe
 
 if (Get-Command lazygit.exe -ErrorAction SilentlyContinue) {
     Set-Alias -Name lg -Value lazygit.exe
