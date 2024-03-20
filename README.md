@@ -6,7 +6,7 @@
 though is optional.
 
 ```sh
-winget install Git.Git Starship.Starship
+winget install JanDeDobbeleer.OhMyPosh -s winget
 ```
 
 ## Installation
