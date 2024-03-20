@@ -29,5 +29,5 @@ if (Get-Command lazygit.exe -ErrorAction SilentlyContinue) {
 # OH-MY-POSH ------------------------------------------------------------------
 if (Get-Command oh-my-posh.exe -ErrorAction SilentlyContinue) {
     $OMP_CONFIG = "~\Documents\Powershell\thundership.omp.jsonc"
-    oh-my-posh init pwsh --config $OMP_CONFIG | Invoke-Expression
+    (@(& oh-my-posh init pwsh --config $OMP_CONFIG --print) -join "`n") | Invoke-Expression
 }
