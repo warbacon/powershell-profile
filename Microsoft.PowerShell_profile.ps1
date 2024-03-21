@@ -22,12 +22,18 @@ function .. {
 }
 Set-Alias -Name touch -Value New-Item
 
-if (Get-Command lazygit.exe -ErrorAction SilentlyContinue) {
-    Set-Alias -Name lg -Value lazygit.exe
-}
-
 # OH-MY-POSH ------------------------------------------------------------------
-if (Get-Command oh-my-posh.exe -ErrorAction SilentlyContinue) {
-    $OMP_CONFIG = "~\Documents\Powershell\thundership.omp.jsonc"
-    (@(& oh-my-posh init pwsh --config $OMP_CONFIG --print) -join "`n") | Invoke-Expression
+if (Get-Command starship.exe -ErrorAction SilentlyContinue) {
+
+    # Set window title
+    function Invoke-Starship-PreCommand {
+        $Host.UI.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
+    }
+
+    # Enviromental variables
+    $Env:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
+    $Env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
+
+    # Start Starship
+    Invoke-Expression (&starship init powershell --print-full-init | Out-String)
 }
