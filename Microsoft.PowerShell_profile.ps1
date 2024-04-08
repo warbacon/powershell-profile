@@ -22,10 +22,17 @@ function .. {
 }
 Set-Alias -Name touch -Value New-Item
 
-# OH-MY-POSH ------------------------------------------------------------------
+# Launches Neogit inside Neovim. You should remove this if you don't use Neogit.
+if (Get-Command nvim.exe -ErrorAction SilentlyContinue) {
+    function ng {
+        nvim +Neogit
+    }
+}
+
+# STARSHIP --------------------------------------------------------------------
 if (Get-Command starship.exe -ErrorAction SilentlyContinue) {
 
-    # Set window title
+    # Sets window title
     function Invoke-Starship-PreCommand {
         $Host.UI.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
     }
@@ -34,6 +41,6 @@ if (Get-Command starship.exe -ErrorAction SilentlyContinue) {
     $Env:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
     $Env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
 
-    # Start Starship
+    # Starts Starship
     Invoke-Expression (&starship init powershell --print-full-init | Out-String)
 }
