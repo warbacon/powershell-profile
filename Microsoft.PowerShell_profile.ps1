@@ -22,11 +22,8 @@ function .. {
 }
 Set-Alias -Name touch -Value New-Item
 
-# Launches Neogit inside Neovim. You should remove this if you don't use Neogit.
-if (Get-Command nvim.exe -ErrorAction SilentlyContinue) {
-    function ng {
-        nvim +Neogit
-    }
+if (Get-Command lazygit.exe -ErrorAction SilentlyContinue) {
+    Set-Alias -Name lg -Value Lazygit
 }
 
 # STARSHIP --------------------------------------------------------------------
