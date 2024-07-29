@@ -60,8 +60,13 @@ if (Test-Command "starship.exe") {
     }
 
     # Environmental variables
-    $Env:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
-    $Env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
+    if ($IsWindows) {
+        $env:STARSHIP_CONFIG = "$HOME\Documents\Powershell\starship.toml"
+        $env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
+    }
+    else {
+        $env:STARSHIP_CONFIG = "$HOME/.config/powershell/starship.toml"
+    }
 
     # Starts Starship
     Invoke-Expression (&starship init powershell --print-full-init | Out-String)
