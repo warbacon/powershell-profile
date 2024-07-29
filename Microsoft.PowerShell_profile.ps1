@@ -28,6 +28,7 @@ Set-PSReadLineOption -Colors @{
 
 # KEYBINDINGS -----------------------------------------------------------------
 Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineKeyHandler -Key Ctrl+w -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
 Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
 Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
