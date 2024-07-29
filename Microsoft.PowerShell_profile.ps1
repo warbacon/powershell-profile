@@ -1,6 +1,7 @@
 # UTILITY ---------------------------------------------------------------------
 function Test-Command {
     param (
+        [Parameter(Position=0,mandatory=$true)]
         [string]$Command
     )
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
@@ -10,7 +11,8 @@ function Get-PublicIP {
     try {
         $ip = Invoke-RestMethod -Uri "https://api.ipify.org?format=json"
         return $ip.ip
-    } catch {
+    }
+    catch {
         Write-Error "Failed to retrieve the public IP address: $_"
         return $null
     }
