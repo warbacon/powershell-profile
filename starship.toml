@@ -1,6 +1,8 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+add_newline = true
+
 format = """
 $username\
 $directory\
@@ -15,6 +17,7 @@ $status\
 $character"""
 
 [directory]
+format = "[ $path]($style)[$read_only]($read_only_style) "
 read_only = ' 󰌾'
 truncation_length = 0
 
@@ -28,7 +31,7 @@ format = '[$status]($style) '
 style = 'bold bright-red'
 
 [character]
-#success_symbol = '❱'
-#error_symbol = '[❱](bright-red)'
-success_symbol = '[>](bold)'
-error_symbol = '[>](bold bright-red)'
+success_symbol = '❱'
+error_symbol = '[❱](bright-red)'
+# success_symbol = '[>](bold)'
+# error_symbol = '[>](bright-red bold)'
