@@ -56,7 +56,7 @@ if (Test-Command "starship.exe") {
 
     # Sets window title
     function Invoke-Starship-PreCommand {
-        $Host.UI.RawUI.WindowTitle = "$pwd".Replace("$HOME", "~")
+        $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
     }
 
     # Environmental variables
