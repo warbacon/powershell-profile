@@ -7,6 +7,7 @@ function Test-Command {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
+# Uses -> https://www.ipify.org
 function Get-PublicIP {
     try {
         $ip = Invoke-RestMethod -Uri "https://api.ipify.org?format=json"
@@ -16,6 +17,11 @@ function Get-PublicIP {
         Write-Error "Failed to retrieve the public IP address: $_"
         return $null
     }
+}
+
+# Source -> https://github.com/ChrisTitusTech/winutil
+function Invoke-Winutil {
+    Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
 }
 
 # APPEARANCE ------------------------------------------------------------------
