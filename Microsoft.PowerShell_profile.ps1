@@ -53,7 +53,7 @@ if (Test-Command "lazygit.exe") {
     Set-Alias -Name lg -Value lazygit.exe
 }
 
-if (Test-Command "scoop") {
+if ((Test-Command "scoop") -and (Test-Command "scoop-search")) {
     Invoke-Expression (&scoop-search --hook)
 }
 
