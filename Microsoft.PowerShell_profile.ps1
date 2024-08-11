@@ -60,9 +60,17 @@ if (Test-Command "scoop") {
 # STARSHIP --------------------------------------------------------------------
 if (Test-Command "starship.exe") {
 
-    # Sets window title
     function Invoke-Starship-PreCommand {
+        # Sets window title
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
+
+        # Enables tab/pane duplication
+        $loc = $executionContext.SessionState.Path.CurrentLocation;
+        $prompt = "$([char]27)]9;12$([char]7)"
+        if ($loc.Provider.Name -eq "FileSystem") {
+            $prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+        }
+        $host.ui.Write($prompt)
     }
 
     # Environmental variables
