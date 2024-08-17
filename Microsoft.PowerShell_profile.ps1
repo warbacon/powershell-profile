@@ -51,7 +51,7 @@ function .. {
 Set-Alias -Name touch -Value New-Item
 
 if (Test-Command "lazygit") {
-    Set-Alias -Name lg -Value lazygit.exe
+    Set-Alias -Name lg -Value lazygit
 }
 
 if ((Test-Command "scoop") -and (Test-Command "scoop-search")) {
