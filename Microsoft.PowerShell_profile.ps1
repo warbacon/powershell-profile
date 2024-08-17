@@ -66,7 +66,7 @@ if (Test-Command "starship") {
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
 
         # Enables tab/pane duplication in Windows Terminal
-        if ($WT_SESSION) {
+        if ($env:WT_SESSION) {
             $loc = $executionContext.SessionState.Path.CurrentLocation;
             $prompt = "$([char]27)]9;12$([char]7)"
             if ($loc.Provider.Name -eq "FileSystem") {
