@@ -30,6 +30,7 @@ Set-PSReadLineOption -Colors @{
     Parameter        = "Blue"
     Operator         = "Blue"
     InlinePrediction = "DarkGray"
+    Default = "White"
 }
 
 # KEYBINDINGS -----------------------------------------------------------------
