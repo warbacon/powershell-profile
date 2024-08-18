@@ -5,18 +5,36 @@ This was made exclusively for [PowerShell
 **not Windows PowerShell.**
 
 > [!NOTE]
-> Linux and macOS support is limited.
+> This profile is intended for use on Windows. Although it also works correctly
+> on Linux and macOS, it is not optimized for them at the moment.
 
-> [!TIP]
-> It is recommended to use version 7.4 or later to take advantage of experimental
+## 🚀 Features
+
+- Bash-like keyboard shortcuts
+- Improved syntax highlighting colors
+- Nice, simple and fast prompt. Uses [Starship](https://starship.rs)
+- Windows Terminal integration for tab and pane duplication
+- Enables some useful experimental powershell features
+- Includes a few useful aliases
+- And some other smaller goodies!
+
+### Enabled experimental features
+
+> [!NOTE]
+> You need to use version 7.4 or later to take advantage of experimental
 > features.
 
-## ⚙️ Optional dependencies
+- **PSCommandNotFoundSuggestion:** Recommend potential commands based on fuzzy
+search on a CommandNotFoundException
+- **PSFeedbackProvider:** Replace the hard-coded suggestion framework with the
+extensible feedback provider
+
+## 💊 Optional dependencies
 
 `starship` is used as prompt when it's installed. Refer to its [installation
 guide](https://starship.rs/guide/#%F0%9F%9A%80-installation)
 
-## 🚀 Installation
+## 🪛 Installation
 
 Just clone this repository as your PowerShell 7 profile like this if you are in
 Windows:
