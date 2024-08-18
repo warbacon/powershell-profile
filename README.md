@@ -7,8 +7,9 @@ This was made exclusively for [PowerShell
 > [!NOTE]
 > Linux and macOS support is limited.
 
-> [!TIP] It is recommended to use version 7.4 or later to take advantage of
-> experimental features.
+> [!TIP]
+> It is recommended to use version 7.4 or later to take advantage of experimental
+> features.
 
 ## ⚙️ Optional dependencies
 
