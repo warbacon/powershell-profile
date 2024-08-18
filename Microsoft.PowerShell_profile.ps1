@@ -27,10 +27,10 @@ function Invoke-Winutil {
 # APPEARANCE ------------------------------------------------------------------
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
-    Parameter        = "Blue"
-    Operator         = "Blue"
+    Default          = "White"
     InlinePrediction = "DarkGray"
-    Default = "White"
+    Operator         = "Blue"
+    Parameter        = "Blue"
 }
 
 # KEYBINDINGS -----------------------------------------------------------------
