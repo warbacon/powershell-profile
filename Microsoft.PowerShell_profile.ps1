@@ -1,5 +1,5 @@
 # UTILITY ---------------------------------------------------------------------
-function Test-Command {
+function Test-CommandExists {
     param (
         [Parameter(Position=0,mandatory=$true)]
         [string]$Command
@@ -7,32 +7,33 @@ function Test-Command {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
+$env:EDITOR = if (Test-CommandExists nvim) {
+    "nvim"
+}
+elseif (Test-CommandExists code) {
+    "code"
+}
+
 # Uses -> https://www.ipify.org
-function Get-PublicIP {
-    try {
-        $ip = Invoke-RestMethod -Uri "https://api.ipify.org?format=json"
-        return $ip.ip
-    }
-    catch {
-        Write-Error "Failed to retrieve the public IP address: $_"
-        return $null
-    }
+function Get-PubIP {
+    return = (Invoke-RestMethod -Uri "https://api.ipify.org?format=json").ip
 }
 
 # Source -> https://github.com/ChrisTitusTech/winutil
-function winutil {
-    if (-not ([Security.Principal.WindowsPrincipal] `
-                [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-                [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+if ($IsWindows) {
+    function winutil {
+        if (-not ([Security.Principal.WindowsPrincipal] `
+                    [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+                    [Security.Principal.WindowsBuiltInRole] "Administrator")) {
 
-        # Relaunch the script with administrator privileges
-        $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
-        Start-Process powershell -ArgumentList `
-            "-NoProfile -ExecutionPolicy Bypass -Command `"$command`"" -Verb RunAs
-    }
-    else {
-        # Execute the command directly if already running as administrator
-        Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+            # Relaunch the script with administrator privileges
+            $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
+            Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
+        }
+        else {
+            # Execute the command directly if already running as administrator
+            Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+        }
     }
 }
 
@@ -57,21 +58,23 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 
 # ALIASES ---------------------------------------------------------------------
+Set-Alias -Name touch -Value New-Item
+
 function .. {
     Set-Location ..
 }
-Set-Alias -Name touch -Value New-Item
 
-if (Test-Command "lazygit") {
+if (Test-CommandExists "lazygit") {
     Set-Alias -Name lg -Value lazygit
 }
 
-if ((Test-Command "scoop") -and (Test-Command "scoop-search")) {
+# SCOOP-SEARCH INTEGRATION ----------------------------------------------------
+if ((Test-CommandExists "scoop") -and (Test-CommandExists "scoop-search")) {
     Invoke-Expression (&scoop-search --hook)
 }
 
 # STARSHIP --------------------------------------------------------------------
-if (Test-Command "starship") {
+if (Test-CommandExists "starship") {
 
     function Invoke-Starship-PreCommand {
         # Sets window title
