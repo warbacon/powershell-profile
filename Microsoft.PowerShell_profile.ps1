@@ -20,8 +20,20 @@ function Get-PublicIP {
 }
 
 # Source -> https://github.com/ChrisTitusTech/winutil
-function Invoke-Winutil {
-    Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+function winutil {
+    if (-not ([Security.Principal.WindowsPrincipal] `
+                [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+                [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
+        # Relaunch the script with administrator privileges
+        $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
+        Start-Process powershell -ArgumentList `
+            "-NoProfile -ExecutionPolicy Bypass -Command `"$command`"" -Verb RunAs
+    }
+    else {
+        # Execute the command directly if already running as administrator
+        Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+    }
 }
 
 # APPEARANCE ------------------------------------------------------------------
