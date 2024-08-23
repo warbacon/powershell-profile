@@ -26,9 +26,14 @@ if ($IsWindows) {
                     [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
                     [Security.Principal.WindowsBuiltInRole] "Administrator")) {
 
-            # Relaunch the script with administrator privileges
+            # Launch the script with administrator privileges
             $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
-            Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
+            if (Test-CommandExists "wt.exe") {
+                # Use Windows Terminal only if it's installed
+                Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
+            } else {
+                Start-Process pwsh.exe -ArgumentList "-Command `"$command`"" -Verb RunAs
+            }
         }
         else {
             # Execute the command directly if already running as administrator
