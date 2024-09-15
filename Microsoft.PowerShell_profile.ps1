@@ -22,7 +22,23 @@ function Get-PubIP {
 # Source -> https://github.com/ChrisTitusTech/winutil
 if ($IsWindows) {
     function winutil {
-        Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+        if (-not ([Security.Principal.WindowsPrincipal] `
+                    [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+                    [Security.Principal.WindowsBuiltInRole] "Administrator")) {
+
+            # Launch the script with administrator privileges
+            $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
+            if (Test-CommandExists "wt.exe") {
+                # Use Windows Terminal only if it's installed
+                Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
+            } else {
+                Start-Process pwsh.exe -ArgumentList "-Command `"$command`"" -Verb RunAs
+            }
+        }
+        else {
+            # Execute the command directly if already running as administrator
+            Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression
+        }
     }
 }
 
