@@ -49,7 +49,7 @@ if ($IsWindows) {
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
     Default          = "$($PSStyle.Reset)"
-    InlinePrediction = "DarkGray"
+    InlinePrediction = "`e[90;3m"
     Operator         = "Blue"
     Parameter        = "Blue"
 }
