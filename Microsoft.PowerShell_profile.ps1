@@ -34,7 +34,8 @@ if ($IsWindows) {
             if (Test-CommandExists "wt.exe") {
                 # Use Windows Terminal only if it's installed
                 Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
-            } else {
+            }
+            else {
                 Start-Process pwsh.exe -ArgumentList "-Command `"$command`"" -Verb RunAs
             }
         }
