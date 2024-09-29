@@ -10,6 +10,9 @@ function Test-CommandExists {
 $env:EDITOR = if (Test-CommandExists nvim) {
     "nvim"
 }
+elseif (Test-CommandExists vim) {
+    "vim"
+}
 elseif (Test-CommandExists code) {
     "code"
 }
