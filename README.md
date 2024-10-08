@@ -10,12 +10,12 @@ This was made exclusively for [PowerShell
 
 ## 🚀 Features
 
-- Bash-like keyboard shortcuts
-- Improved syntax highlighting colors
-- Nice, simple and fast prompt. Uses [Starship](https://starship.rs)
-- Windows Terminal integration for tab and pane duplication
-- Enables some useful experimental powershell features
-- Includes a few useful aliases
+- Bash-like keyboard shortcuts.
+- Improved syntax highlighting colors.
+- Nice, simple and fast prompt. Uses [Starship](https://starship.rs).
+- Windows Terminal integration for tab and pane duplication.
+- Enables some useful experimental powershell features.
+- Includes a few useful aliases.
 - And some other smaller goodies!
 
 ### Enabled experimental features
@@ -25,14 +25,14 @@ This was made exclusively for [PowerShell
 > features.
 
 - **PSCommandNotFoundSuggestion:** Recommend potential commands based on fuzzy
-search on a CommandNotFoundException
+search on a CommandNotFoundException.
 - **PSFeedbackProvider:** Replace the hard-coded suggestion framework with the
-extensible feedback provider
+extensible feedback provider.
 
 ## 💊 Optional dependencies
 
 `starship` is used as prompt when it's installed. Refer to its [installation
-guide](https://starship.rs/guide/#%F0%9F%9A%80-installation)
+guide](https://starship.rs/guide/#%F0%9F%9A%80-installation).
 
 ## 🪛 Installation
 
