@@ -81,7 +81,10 @@ if (Test-CommandExists "lazygit") {
 }
 
 # SCOOP-SEARCH INTEGRATION ----------------------------------------------------
-if ((Test-CommandExists "scoop") -and (Test-CommandExists "scoop-search")) {
+if (Test-CommandExists "scoop") {
+    if (-not (Test-CommandExists "scoop-search")) {
+        scoop install scoop-search
+    }
     Invoke-Expression (&scoop-search --hook)
 }
 
