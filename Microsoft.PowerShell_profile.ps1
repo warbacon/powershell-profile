@@ -95,6 +95,11 @@ if (Test-CommandExists "starship") {
         # Sets window title
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
 
+        # Add smart newline
+        if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
+            Write-Host
+        }
+
         # Enables tab/pane duplication in Windows Terminal
         if ($env:WT_SESSION) {
             $loc = $executionContext.SessionState.Path.CurrentLocation;
@@ -116,5 +121,6 @@ if (Test-CommandExists "starship") {
     }
 
     # Starts Starship
+    #oh-my-posh init pwsh --config F:\dotfiles\config\thundership.omp.json | Invoke-Expression
     Invoke-Expression (&starship init powershell --print-full-init | Out-String)
 }

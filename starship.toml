@@ -1,29 +1,55 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-add_newline = true
+add_newline = false
 
 format = """
+$shlvl\
+$shell\
 $username\
 $directory\
 $git_branch\
 $git_commit\
 $git_state\
 $git_status\
+$hg_branch\
+$python\
+$nix_shell\
 $cmd_duration\
-$jobs\
 $line_break\
+$jobs\
 $status\
+$container\
 $character"""
 
+[shlvl]
+disabled = false
+format = '[$symbol$shlvl]($style) '
+symbol = '⮟ '
+
+[shell]
+disabled = false
+fish_indicator = '󰈺 fish'
+bash_indicator = ' bash'
+zsh_indicator = ' zsh'
+powershell_indicator = '󰨊 pwsh'
 [directory]
-format = "[ $path]($style)[$read_only]($read_only_style) "
+format = '[ $path]($style)[$read_only]($read_only_style) '
 read_only = ' 󰌾'
 truncation_length = 0
 
 [git_commit]
 tag_disabled = false
 tag_symbol = '  '
+
+[python]
+format = '[\($virtualenv\)]($style) '
+style = 'bold bright-green'
+detect_extensions = []
+detect_files = []
+
+[nix_shell]
+symbol='❄ '
 
 [status]
 disabled = false
@@ -33,5 +59,3 @@ style = 'bold bright-red'
 [character]
 success_symbol = '❱'
 error_symbol = '[❱](bright-red)'
-# success_symbol = '[>](bold)'
-# error_symbol = '[>](bright-red bold)'
