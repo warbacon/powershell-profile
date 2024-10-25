@@ -1,4 +1,6 @@
 # UTILITY ---------------------------------------------------------------------
+$PROFILE_DIR = "$(Split-Path -Path $PROFILE)"
+
 function Test-CommandExists {
     param (
         [Parameter(Position=0,mandatory=$true)]
@@ -19,7 +21,7 @@ elseif (Test-CommandExists code) {
 
 # Uses -> https://www.ipify.org
 function Get-PubIP {
-    return = (Invoke-RestMethod -Uri "https://api.ipify.org?format=json").ip
+    return (Invoke-RestMethod -Uri "https://api.ipify.org?format=json").ip
 }
 
 # Source -> https://github.com/ChrisTitusTech/winutil
@@ -92,15 +94,15 @@ if (Test-CommandExists "scoop") {
 if (Test-CommandExists "starship") {
 
     function Invoke-Starship-PreCommand {
-        # Sets window title
+        # Set the window title
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
 
-        # Add smart newline
+        # Add a newline when needed
         if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
             Write-Host
         }
 
-        # Enables tab/pane duplication in Windows Terminal
+        # Enable tab/pane duplication in Windows Terminal
         if ($env:WT_SESSION) {
             $loc = $executionContext.SessionState.Path.CurrentLocation;
             $prompt = "$([char]27)]9;12$([char]7)"
@@ -112,14 +114,11 @@ if (Test-CommandExists "starship") {
     }
 
     # Environmental variables
+    $env:STARSHIP_CONFIG = "$PROFILE_DIR/starship.toml"
     if ($IsWindows) {
-        $env:STARSHIP_CONFIG = "$HOME\Documents\PowerShell\starship.toml"
-        $env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp"
-    }
-    else {
-        $env:STARSHIP_CONFIG = "$HOME/.config/powershell/starship.toml"
+        $env:STARSHIP_CACHE = "$HOME/AppData/Local/Temp"
     }
 
-    # Starts Starship
-    . "$HOME/Documents/PowerShell/Start-Starship.ps1"
+    # Start Starship
+    . "$PROFILE_DIR/Start-Starship.ps1"
 }
