@@ -121,6 +121,5 @@ if (Test-CommandExists "starship") {
     }
 
     # Starts Starship
-    #oh-my-posh init pwsh --config F:\dotfiles\config\thundership.omp.json | Invoke-Expression
-    Invoke-Expression (&starship init powershell --print-full-init | Out-String)
+    . "$HOME/Documents/PowerShell/Start-Starship.ps1"
 }
