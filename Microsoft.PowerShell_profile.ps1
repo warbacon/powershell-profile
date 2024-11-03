@@ -94,7 +94,7 @@ if (Test-CommandExists "scoop") {
 }
 
 # CARAPACE ---------------------------------------------------------------------
-if (Test-CommandExists carapace) {
+if (Test-CommandExists "carapace") {
     $env:CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
     carapace _carapace | Out-String | Invoke-Expression
 }
