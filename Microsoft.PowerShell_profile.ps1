@@ -60,7 +60,6 @@ Set-PSReadLineOption -Colors @{
     InlinePrediction = "`e[90;3m"
     Operator         = "Blue"
     Parameter        = "Blue"
-    Selection        = "$($PSStyle.Reverse)"
 }
 
 # KEYBINDINGS -----------------------------------------------------------------
@@ -91,12 +90,6 @@ if (Test-CommandExists "scoop") {
         scoop install scoop-search
     }
     Invoke-Expression (&scoop-search --hook)
-}
-
-# CARAPACE ---------------------------------------------------------------------
-if (Test-CommandExists "carapace") {
-    $env:CARAPACE_BRIDGES = "zsh,fish,bash,inshellisense"
-    carapace _carapace | Out-String | Invoke-Expression
 }
 
 # STARSHIP --------------------------------------------------------------------
