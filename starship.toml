@@ -4,7 +4,6 @@
 add_newline = false
 
 format = """
-$shlvl\
 $shell\
 $username\
 $directory\
@@ -16,23 +15,21 @@ $hg_branch\
 $python\
 $nix_shell\
 $cmd_duration\
+$fill\
 $line_break\
 $jobs\
 $status\
 $container\
 $character"""
 
-[shlvl]
-disabled = false
-format = '[$symbol$shlvl]($style) '
-symbol = '⮟ '
-
 [shell]
 disabled = false
 fish_indicator = '󰈺 fish'
 bash_indicator = ' bash'
-zsh_indicator = ' zsh'
+zsh_indicator = '󰏰 zsh'
 powershell_indicator = '󰨊 pwsh'
+nu_indicator = '󰞷 nu'
+
 [directory]
 format = '[ $path]($style)[$read_only]($read_only_style) '
 read_only = ' 󰌾'
@@ -50,6 +47,10 @@ detect_files = []
 
 [nix_shell]
 symbol='❄ '
+
+[fill]
+symbol = "-"
+style = "bright-black"
 
 [status]
 disabled = false
