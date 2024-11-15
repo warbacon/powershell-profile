@@ -94,7 +94,6 @@ if (Test-CommandExists "scoop") {
 
 # STARSHIP --------------------------------------------------------------------
 if (Test-CommandExists "starship") {
-
     function Invoke-Starship-PreCommand {
         # Set the window title
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
@@ -104,23 +103,30 @@ if (Test-CommandExists "starship") {
             Write-Host
         }
 
-        # Enable tab/pane duplication in Windows Terminal
+        # Support Windows Terminal tab/pane duplication
         if ($env:WT_SESSION) {
-            $loc = $executionContext.SessionState.Path.CurrentLocation;
-            $prompt = "$([char]27)]9;12$([char]7)"
-            if ($loc.Provider.Name -eq "FileSystem") {
-                $prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+            $current_location = $executionContext.SessionState.Path.CurrentLocation
+            $prompt = "`e]9;12`a"
+            if ($current_location.Provider.Name -eq "FileSystem") {
+                $prompt += "`e]9;9;`"$($current_location.ProviderPath)`"`e\"
             }
-            $host.ui.Write($prompt)
+            $Host.UI.Write($prompt)
         }
     }
 
     # Environmental variables
     $env:STARSHIP_CONFIG = "$PROFILE_DIR/starship.toml"
     if ($IsWindows) {
-        $env:STARSHIP_CACHE = "$HOME/AppData/Local/Temp"
+        $env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp\starship"
+    }
+
+    # Create Starship start script if it doesn't exist
+    if (-not (Test-Path -Path "$env:STARSHIP_CACHE/Start-Starship.ps1" -PathType Leaf)) {
+        New-Item -ItemType Directory -Force $env:STARSHIP_CACHE | Out-Null
+        starship completions powershell >"$env:STARSHIP_CACHE/Start-Starship.ps1"
+        starship init powershell --print-full-init >>"$env:STARSHIP_CACHE/Start-Starship.ps1"
     }
 
     # Start Starship
-    . "$PROFILE_DIR/Start-Starship.ps1"
+    . "$env:STARSHIP_CACHE/Start-Starship.ps1"
 }
