@@ -15,7 +15,6 @@ $hg_branch\
 $python\
 $nix_shell\
 $cmd_duration\
-$fill\
 $line_break\
 $jobs\
 $status\
@@ -49,8 +48,8 @@ detect_files = []
 symbol='❄ '
 
 [fill]
-symbol = "-"
-style = "bright-black"
+symbol = '─'
+style = 'bright-black'
 
 [status]
 disabled = false
@@ -58,5 +57,6 @@ format = '[$status]($style) '
 style = 'bold bright-red'
 
 [character]
-success_symbol = '❱'
-error_symbol = '[❱](bright-red)'
+success_symbol = '❯'
+error_symbol = '[❯](bright-red)'
+vimcmd_symbol = '❮'
