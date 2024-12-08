@@ -2,7 +2,7 @@
 
 Welcome to my personal **PowerShell 7 profile** repository! Built exclusively
 for [PowerShell
-7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows),
+7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell),
 this configuration transforms your shell experience into something faster, more
 intuitive, and full of handy features.
 
