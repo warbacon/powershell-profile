@@ -10,8 +10,6 @@ intuitive, and full of handy features.
 > This profile is optimized for **Windows**, but it also works on **Linux** and
 > **macOS**. Cross-platform enhancements are planned for future updates!
 
----
-
 ## 🚀 Features That Shine
 
 - **Bash-like Keyboard Shortcuts**: Work faster with familiar shortcuts.
@@ -24,8 +22,6 @@ intuitive, and full of handy features.
 - **Handy Aliases**: Save time with quick commands.
 - Plus, a handful of **small but impactful tweaks**!
 
----
-
 ## ⚡ Experimental Features Enabled
 
 > [!IMPORTANT]
@@ -35,16 +31,12 @@ intuitive, and full of handy features.
   mistype.
 - **PSFeedbackProvider**: A customizable framework for smarter feedback.
 
----
-
 ## 💡 Optional Dependencies
 
 To unlock additional functionality, consider installing:
 
 - **[Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)**: A
 blazing-fast, highly customizable prompt.
-
----
 
 ## 📦 Installation Guide
 
