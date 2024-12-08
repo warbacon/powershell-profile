@@ -26,33 +26,6 @@ function Get-PubIP {
     return (Invoke-RestMethod -Uri "https://api.ipify.org?format=json").ip
 }
 
-# Source -> https://github.com/ChrisTitusTech/winutil
-if ($IsWindows) {
-    function winutil {
-        # Define the command to execute
-        $command = 'Invoke-RestMethod "https://christitus.com/win" | Invoke-Expression'
-
-        # Check if the script is being run as an administrator
-        if (-not ([Security.Principal.WindowsPrincipal] `
-                    [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-                    [Security.Principal.WindowsBuiltInRole] "Administrator")) {
-
-            # Launch the script with administrator privileges
-            if (Test-CommandExists "wt.exe") {
-                # Use Windows Terminal if installed
-                Start-Process wt.exe -ArgumentList "pwsh.exe -Command `"$command`"" -Verb RunAs
-            }
-            else {
-                Start-Process pwsh.exe -ArgumentList "-Command `"$command`"" -Verb RunAs
-            }
-        }
-        else {
-            # Execute the command directly if already running as administrator
-            Invoke-Expression $command
-        }
-    }
-}
-
 # APPEARANCE ------------------------------------------------------------------
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
