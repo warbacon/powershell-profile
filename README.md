@@ -34,9 +34,6 @@ extensible feedback provider.
 - `starship` is used as prompt when it's installed. Refer to its [installation
 guide](https://starship.rs/guide/#%F0%9F%9A%80-installation).
 
-- `carapace` provides completions of for a large number of commands if it's
-installed. You can use `winget install -e --id rsteube.Carapace` to install it.
-
 ## 🪛 Installation
 
 Just clone this repository as your PowerShell 7 profile like this if you are in
