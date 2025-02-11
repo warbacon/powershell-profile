@@ -9,8 +9,6 @@ function Test-CommandExists {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-$env:SHELL = "pwsh"  # Can cause problems
-
 $env:EDITOR = if (Test-CommandExists nvim) {
     "nvim"
 }
