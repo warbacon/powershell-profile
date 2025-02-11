@@ -2,11 +2,19 @@
 $PROFILE_DIR = "$(Split-Path -Path $PROFILE)"
 
 function Test-CommandExists {
+    [CmdletBinding()]
+    [OutputType([bool])]
     param (
-        [Parameter(Position=0,mandatory=$true)]
+        [Parameter(Position = 0, Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]$Command
     )
-    return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+    if (Get-Command $Command -ErrorAction SilentlyContinue) {
+        Write-Output $true
+    }
+    else {
+        Write-Output $false
+    }
 }
 
 $env:EDITOR = if (Test-CommandExists nvim) {
