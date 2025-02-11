@@ -55,6 +55,24 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 # ALIASES ---------------------------------------------------------------------
 Set-Alias -Name touch -Value New-Item
 
+function which {
+    [CmdletBinding()]
+    param(
+        [Parameter(Position=0, Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string]$ProgramName
+    )
+
+    $Command = Get-Command $ProgramName -ErrorAction SilentlyContinue
+
+    if ($Command -and $Command.CommandType -eq 'Application') {
+        $Command.Source
+    }
+    else {
+        Write-Error "$ProgramName is not a program."
+    }
+}
+
 function .. {
     Set-Location ..
 }
