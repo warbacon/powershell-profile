@@ -11,14 +11,11 @@ $git_branch\
 $git_commit\
 $git_state\
 $git_status\
-$hg_branch\
 $python\
-$nix_shell\
 $cmd_duration\
 $line_break\
 $jobs\
 $status\
-$container\
 $character"""
 
 [shell]
@@ -33,6 +30,7 @@ nu_indicator = '󰞷 nu'
 format = '[ $path]($style)[$read_only]($read_only_style) '
 read_only = ' 󰌾'
 truncation_length = 0
+style = 'bold blue'
 
 [git_commit]
 tag_disabled = false
@@ -43,13 +41,6 @@ format = '[\($virtualenv\)]($style) '
 style = 'bold bright-green'
 detect_extensions = []
 detect_files = []
-
-[nix_shell]
-symbol='❄ '
-
-[fill]
-symbol = '─'
-style = 'bright-black'
 
 [status]
 disabled = false
