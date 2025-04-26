@@ -76,6 +76,35 @@ function .. {
     Set-Location ..
 }
 
+if (Test-CommandExists eza) {
+    Remove-Item -Path Alias:ls
+
+    function ls {
+        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
+        eza --icons --group-directories-first @Args
+    }
+
+    function ll {
+        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
+        eza --icons --group-directories-first --git -lh @Args
+    }
+
+    function lt {
+        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
+        eza --icons --group-directories-first --git -lT -L 3 @Args
+    }
+
+    function la {
+        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
+        eza --icons --group-directories-first -a @Args
+    }
+
+    function lla {
+        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
+        eza --icons --group-directories-first --git -lha @Args
+    }
+}
+
 if (Test-CommandExists "lazygit") {
     Set-Alias -Name lg -Value lazygit
 }
