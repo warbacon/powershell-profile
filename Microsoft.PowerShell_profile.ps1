@@ -63,12 +63,11 @@ function which {
         [string]$ProgramName
     )
 
-    $Command = Get-Command $ProgramName -ErrorAction SilentlyContinue
-
-    if ($Command -and $Command.CommandType -eq 'Application') {
-        $Command.Source
+    try {
+        $Command = Get-Command -Name $ProgramName -ErrorAction Stop -CommandType Application
+        return $Command.Source
     }
-    else {
+    catch {
         Write-Error "$ProgramName is not a program."
     }
 }
