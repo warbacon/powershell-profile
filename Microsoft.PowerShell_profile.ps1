@@ -148,7 +148,7 @@ if (Test-CommandExists "starship") {
     # Create Starship start script if it doesn't exist
     if (-not (Test-Path -Path "$env:STARSHIP_CACHE/Start-Starship.ps1" -PathType Leaf)) {
         New-Item -ItemType Directory -Force $env:STARSHIP_CACHE | Out-Null
-        starship completions powershell >"$env:STARSHIP_CACHE/Start-Starship.ps1"
+        starship completions power-shell >"$env:STARSHIP_CACHE/Start-Starship.ps1"
         starship init powershell --print-full-init >>"$env:STARSHIP_CACHE/Start-Starship.ps1"
     }
 
