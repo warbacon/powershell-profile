@@ -80,28 +80,23 @@ if (Test-CommandExists eza) {
     Remove-Item -Path Alias:ls
 
     function ls {
-        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
-        eza --icons --group-directories-first @Args
+        eza --icons --group-directories-first $args
     }
 
     function ll {
-        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
-        eza --icons --group-directories-first --git -lh @Args
+        eza --icons --group-directories-first --git -lh $args
     }
 
     function lt {
-        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
-        eza --icons --group-directories-first --git -lT -L 3 @Args
+        eza --icons --group-directories-first --git -lT -L 3 $args
     }
 
     function la {
-        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
-        eza --icons --group-directories-first -a @Args
+        eza --icons --group-directories-first -a $args
     }
 
     function lla {
-        param([Parameter(ValueFromRemainingArguments=$true)] [string[]] $Args)
-        eza --icons --group-directories-first --git -lha @Args
+        eza --icons --group-directories-first --git -lha $args
     }
 }
 
