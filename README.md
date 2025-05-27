@@ -38,7 +38,7 @@ To unlock additional functionality, consider installing:
 - **[Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)**: A
 blazing-fast, highly customizable prompt.
 - **[Eza](https://eza.rocks/)**: A modern, maintained replacement for the
-venerable file-listing command-line program ls
+venerable file-listing command-line program `ls`.
 
 ## 📦 Installation Guide
 
