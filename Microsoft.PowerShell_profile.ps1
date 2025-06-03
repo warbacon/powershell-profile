@@ -54,6 +54,7 @@ Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 
 # ALIASES ---------------------------------------------------------------------
 Set-Alias -Name touch -Value New-Item
+Set-Alias -Name unzip -Value Expand-Archive
 
 function which {
     [CmdletBinding()]
