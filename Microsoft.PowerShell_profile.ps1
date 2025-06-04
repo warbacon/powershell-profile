@@ -100,7 +100,7 @@ function cdf {
         --exclude .vscode `
         --exclude .npm `
         --exclude .docker `
-        --exclude .ssh `
+        --exclude vendor `
     | fzf --border --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
 
     if ($dir) {
