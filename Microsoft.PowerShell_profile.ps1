@@ -120,7 +120,7 @@ if (Test-CommandExists eza) {
     }
 
     function lt {
-        eza --icons --group-directories-first --git -lT -L 3 $args
+        eza --icons --group-directories-first --git -T -L 3 $args
     }
 
     function la {
