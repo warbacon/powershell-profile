@@ -42,11 +42,9 @@ Set-PSReadLineOption -Colors @{
 }
 
 $env:FZF_DEFAULT_OPTS = @(
+    '--ansi',
     '--highlight-line',
     '--info=inline-right',
-    '--ansi',
-    '--layout=reverse',
-    '--border=none',
     '--color=bg+:#283457',
     '--color=bg:#16161e',
     '--color=border:#27a1b9',
@@ -101,7 +99,7 @@ function cdf {
         --exclude .npm `
         --exclude .docker `
         --exclude vendor `
-    | fzf --border --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
+    | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
 
     if ($dir) {
         Set-Location $dir
@@ -148,7 +146,7 @@ function cdf {
         --exclude ".local/share/Trash" `
         --exclude .vscode `
         --exclude .npm `
-    | fzf --border --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
+    | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
 
     if ($dir) {
         Set-Location $dir
