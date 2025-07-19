@@ -2,52 +2,33 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-
-format = """
-$shell\
-$username\
-$directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
-$python\
-$cmd_duration\
-$line_break\
-$jobs\
-$status\
-$character"""
+format = '$username$shell$directory$git_branch$git_commit$git_status$jobs$line_break$status$character'
 
 [shell]
 disabled = false
-fish_indicator = '󰈺 fish'
-bash_indicator = ' bash'
-zsh_indicator = '󰏰 zsh'
-powershell_indicator = '󰨊 pwsh'
-nu_indicator = '󰞷 nu'
+nu_indicator = '󰞷'
+powershell_indicator = '󰨊'
+style = 'white'
 
 [directory]
-format = '[ $path]($style)[$read_only]($read_only_style) '
 read_only = ' 󰌾'
+repo_root_style = 'bold bright-cyan'
+style = 'cyan'
+truncate_to_repo = false
 truncation_length = 0
-style = 'bold blue'
+
+[git_branch]
+format = '[\($branch\)]($style) '
 
 [git_commit]
 tag_disabled = false
-tag_symbol = '  '
-
-[python]
-format = '[\($virtualenv\)]($style) '
-style = 'bold bright-green'
-detect_extensions = []
-detect_files = []
+tag_symbol = ' • '
 
 [status]
 disabled = false
 format = '[$status]($style) '
-style = 'bold bright-red'
 
 [character]
-success_symbol = '❯'
-error_symbol = '[❯](bright-red)'
-vimcmd_symbol = '❮'
+error_symbol = '[>](bold red)'
+success_symbol = '[>](bold yellow)'
+vimcmd_symbol = '[>](bold yellow)'
