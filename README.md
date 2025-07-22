@@ -25,11 +25,12 @@ intuitive, and full of handy features.
 ## ⚡ Experimental Features Enabled
 
 > [!IMPORTANT]
-> These features require **PowerShell 7.4** or newer.
+> These features require **PowerShell 7.5** or newer.
 
-- **PSCommandNotFoundSuggestion**: Fuzzy suggestions for commands when you
-  mistype.
-- **PSFeedbackProvider**: A customizable framework for smarter feedback.
+- **PSFeedbackProvider**: A customizable framework for smarter feedback. Allows
+  having fuzzy suggestions for commands when you mistype.
+- **PSNativeWindowsTildeExpansion**: Expands unquoted tilde (~) to the user's
+  current home folder before invoking native commands.
 
 ## 💡 Optional Dependencies
 
