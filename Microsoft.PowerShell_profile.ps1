@@ -86,23 +86,6 @@ function .. {
     Set-Location ..
 }
 
-function cdf {
-    $dir = fd --type directory -H `
-        --exclude .git `
-        --exclude node_modules `
-        --exclude .cache `
-        --exclude ".local/share/Trash" `
-        --exclude .vscode `
-        --exclude .npm `
-        --exclude .docker `
-        --exclude vendor `
-    | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
-
-    if ($dir) {
-        Set-Location $dir
-    }
-}
-
 if (Test-CommandExists eza) {
     Remove-Item -Path Alias:ls
 
@@ -132,16 +115,14 @@ if (Test-CommandExists "lazygit") {
 }
 
 function cdf {
-    if (-not (Test-CommandExists "fzf") -or -not (Test-CommandExists "eza") -or -not (Test-CommandExists "fd")) {
-        Write-Error "fzf, eza or fd is not installed."
-        return
-    }
     $dir = fd --type directory -H `
         --exclude .git `
         --exclude node_modules `
         --exclude .cache `
         --exclude .vscode `
         --exclude .npm `
+        --exclude .docker `
+        --exclude vendor `
     | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
 
     if ($dir) {
