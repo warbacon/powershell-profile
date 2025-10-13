@@ -140,7 +140,6 @@ function cdf {
         --exclude .git `
         --exclude node_modules `
         --exclude .cache `
-        --exclude ".local/share/Trash" `
         --exclude .vscode `
         --exclude .npm `
     | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
