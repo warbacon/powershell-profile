@@ -59,22 +59,22 @@ git clone https://github.com/Warbacon/powershell-profile.git "$HOME/.config/powe
 
 ## 🌍 Project Goals
 
-### 1️⃣ Progressive Enhancement
+### 1. Progressive Enhancement
 
 Begin with a fully functional setup that requires no additional dependencies,
 and enhance your experience by adding optional tools.
 
-### 2️⃣ Minimal Start-Up Time
+### 2. Minimal Start-Up Time
 
 PowerShell's start-up can be slow; this profile is designed to keep it as fast
 as possible.
 
-### 3️⃣ Windows First
+### 3. Windows First
 
 While cross-platform functionality exists, this profile prioritizes making
 PowerShell the ultimate shell for Windows users.
 
-### 4️⃣ Simple, Readable Code
+### 4. Simple, Readable Code
 
 Every line is easy to understand, with comments to clarify complex logic.
 
