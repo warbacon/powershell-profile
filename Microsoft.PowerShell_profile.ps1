@@ -115,15 +115,28 @@ if (Test-CommandExists "lazygit") {
 }
 
 function cdf {
+    if ((Get-Host).UI.RawUI.MaxWindowSize.Width -gt 80) {
+        $preview_cmd = "eza --tree --color=always --level=3 --icons=always {}"
+    }
+
     $dir = fd --type directory -H `
-        --exclude .git `
-        --exclude node_modules `
+        --exclude .bun `
         --exclude .cache `
+        --exclude .git `
         --exclude .vscode `
-        --exclude .npm `
-        --exclude .docker `
+        --exclude .vscode `
+        --exclude go `
+        --exclude node_modules `
+        --exclude scoop `
         --exclude vendor `
-    | fzf --layout=reverse --preview="eza --tree --color=always --level 3 --icons=always {}"
+        | fzf --height='50%' `
+            --cycle `
+            --prompt="Go to> " `
+            --scheme=path `
+            --layout=reverse `
+            --border=rounded `
+            --preview-border=rounded `
+            --preview=$preview_cmd
 
     if ($dir) {
         Set-Location $dir
