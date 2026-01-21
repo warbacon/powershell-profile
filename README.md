@@ -40,6 +40,8 @@ To unlock additional functionality, consider installing:
 blazing-fast, highly customizable prompt.
 - **[Eza](https://eza.rocks/)**: A modern, maintained replacement for the
 venerable file-listing command-line program `ls`.
+- **[fd](https://github.com/sharkdp/fd)** and
+**[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
 
 ## 📦 Installation Guide
 

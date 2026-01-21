@@ -1,43 +1,72 @@
-# UTILITY ---------------------------------------------------------------------
-$PROFILE_DIR = "$(Split-Path -Path $PROFILE)"
+#Requires -Version 7
 
+# VARIABLES -------------------------------------------------------------------
+$PROFILE_DIR = Split-Path -Path $PROFILE
+$CACHE_DIR = if ($IsWindows) {
+    "$HOME\AppData\Local\Temp"
+}
+else {
+    "$HOME/.cache"
+}
+
+# UTILITY FUNCTIONS -----------------------------------------------------------
 function Test-CommandExists {
     [CmdletBinding()]
     [OutputType([bool])]
     param (
-        [Parameter(Position = 0, Mandatory = $true)]
+        [Parameter(Position = 0, Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string]$Command
     )
-    if (Get-Command $Command -ErrorAction SilentlyContinue) {
-        Write-Output $true
-    }
-    else {
-        Write-Output $false
-    }
+    [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-$env:EDITOR = if (Test-CommandExists nvim) {
-    "nvim"
-}
-elseif (Test-CommandExists code) {
-    "code"
+function New-CachedScript {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory)]
+        [string]$Name,
+        [Parameter(Mandatory)]
+        [string]$CacheSubDir,
+        [Parameter(Mandatory)]
+        [scriptblock]$Generator
+    )
+
+    $cacheDir = Join-Path $CACHE_DIR $CacheSubDir
+    $scriptPath = Join-Path $cacheDir "Start-$Name.ps1"
+
+    if (-not (Test-Path $scriptPath)) {
+        New-Item -ItemType Directory -Force $cacheDir | Out-Null
+        & $Generator | Out-File -FilePath $scriptPath -Encoding utf8
+    }
+
+    . $scriptPath
 }
 
-# Uses -> https://www.ipify.org
+# Set default editor
+$env:EDITOR = @(
+    'nvim',
+    'code'
+) | Where-Object { Test-CommandExists $_ } | Select-Object -First 1
+
+# Get public IP (uses ipify.org API)
 function Get-PubIP {
-    return (Invoke-RestMethod -Uri "https://api.ipify.org?format=json").ip
+    (Invoke-RestMethod -Uri 'https://api.ipify.org?format=json').ip
 }
 
 # APPEARANCE ------------------------------------------------------------------
 $PSStyle.FileInfo.Directory = "$($PSStyle.Bold)$($PSStyle.Foreground.Blue)"
 Set-PSReadLineOption -Colors @{
-    Default          = "$($PSStyle.Reset)"
+    Default          = $PSStyle.Reset
     InlinePrediction = "`e[90;3m"
-    Operator         = "Blue"
-    Parameter        = "Blue"
+    Operator         = 'Blue'
+    Parameter        = 'Blue'
 }
 
+# LS_COLORS (dircolors compatible)
+$env:LS_COLORS = 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.7z=01;31:*.ace=01;31:*.alz=01;31:*.apk=01;31:*.arc=01;31:*.arj=01;31:*.bz=01;31:*.bz2=01;31:*.cab=01;31:*.cpio=01;31:*.crate=01;31:*.deb=01;31:*.drpm=01;31:*.dwm=01;31:*.dz=01;31:*.ear=01;31:*.egg=01;31:*.esd=01;31:*.gz=01;31:*.jar=01;31:*.lha=01;31:*.lrz=01;31:*.lz=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.lzo=01;31:*.pyz=01;31:*.rar=01;31:*.rpm=01;31:*.rz=01;31:*.sar=01;31:*.swm=01;31:*.t7z=01;31:*.tar=01;31:*.taz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tgz=01;31:*.tlz=01;31:*.txz=01;31:*.tz=01;31:*.tzo=01;31:*.tzst=01;31:*.udeb=01;31:*.war=01;31:*.whl=01;31:*.wim=01;31:*.xz=01;31:*.z=01;31:*.zip=01;31:*.zoo=01;31:*.zst=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.jxl=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:'
+
+# FZF theme
 $env:FZF_DEFAULT_OPTS = @(
     '--ansi',
     '--highlight-line',
@@ -61,7 +90,7 @@ $env:FZF_DEFAULT_OPTS = @(
     '--color=spinner:#ff007c'
 ) -join ' '
 
-# ALIASES ---------------------------------------------------------------------
+# ALIASES & FUNCTIONS ---------------------------------------------------------
 Set-Alias -Name touch -Value New-Item
 Set-Alias -Name unzip -Value Expand-Archive
 
@@ -74,8 +103,8 @@ function which {
     )
 
     try {
-        $Command = Get-Command -Name $ProgramName -ErrorAction Stop -CommandType Application
-        return $Command.Source
+        $cmd = Get-Command -Name $ProgramName -ErrorAction Stop -CommandType Application
+        return $cmd.Source
     }
     catch {
         Write-Error "$ProgramName is not a program."
@@ -86,73 +115,86 @@ function .. {
     Set-Location ..
 }
 
+# EZA integration (modern ls replacement)
 if (Test-CommandExists eza) {
-    Remove-Item -Path Alias:ls
+    Remove-Item -Path Alias:ls -ErrorAction SilentlyContinue
+
+    $ezaDefaults = @('--icons', '--group-directories-first')
 
     function ls {
-        eza --icons --group-directories-first $args
+        & eza @ezaDefaults @args
     }
-
     function ll {
-        eza --icons --group-directories-first --git -lh $args
+        & eza @ezaDefaults --git -lh @args
     }
-
     function lt {
-        eza --icons --group-directories-first --git -T -L 3 $args
+        & eza @ezaDefaults --git -T -L 3 @args
     }
-
     function la {
-        eza --icons --group-directories-first -a $args
+        & eza @ezaDefaults -a @args
     }
-
     function lla {
-        eza --icons --group-directories-first --git -lha $args
+        & eza @ezaDefaults --git -lha @args
     }
 }
 
-if (Test-CommandExists "lazygit") {
+# LazyGit alias
+if (Test-CommandExists lazygit) {
     Set-Alias -Name lg -Value lazygit
 }
 
+# Interactive directory navigation with fzf + fd
 function cdf {
-    if ((Get-Host).UI.RawUI.MaxWindowSize.Width -gt 80) {
-        $preview_cmd = "eza --tree --color=always --level=3 --icons=always {}"
+    $previewCmd = if ((Get-Host).UI.RawUI.MaxWindowSize.Width -gt 80) {
+        'eza --tree --color=always --level=3 --icons=always {}'
     }
 
-    $dir = fd --type directory -H `
-        --exclude .bun `
-        --exclude .cache `
-        --exclude .git `
-        --exclude .vscode `
-        --exclude .vscode `
-        --exclude go `
-        --exclude node_modules `
-        --exclude scoop `
-        --exclude vendor `
-        | fzf --height='50%' `
-            --cycle `
-            --prompt="Go to> " `
-            --scheme=path `
-            --layout=reverse `
-            --border=rounded `
-            --preview-border=rounded `
-            --preview=$preview_cmd
+    $excludes = @(
+        '.bun',
+        '.cache',
+        '.git',
+        '.vscode',
+        'go',
+        'node_modules',
+        'scoop',
+        'vendor'
+    ) | ForEach-Object { @('--exclude', $_) }
 
+    $fzfArgs = @(
+        '--height=50%',
+        '--cycle',
+        '--prompt=Go to> ',
+        '--scheme=path',
+        '--layout=reverse',
+        '--border=rounded',
+        '--preview-border=rounded'
+        "--preview=$previewCmd"
+    )
+
+    $dir = & fd --type directory -H @excludes | & fzf @fzfArgs
     if ($dir) {
         Set-Location $dir
     }
 }
 
 # KEYBINDINGS -----------------------------------------------------------------
-Set-PSReadLineOption -EditMode Emacs
-Set-PSReadLineKeyHandler -Key Ctrl+w -Function BackwardDeleteWord
-Set-PSReadLineKeyHandler -Key Ctrl+Backspace -Function BackwardDeleteWord
-Set-PSReadLineKeyHandler -Key Ctrl+LeftArrow -Function BackwardWord
-Set-PSReadLineKeyHandler -Key Ctrl+RightArrow -Function ForwardWord
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineOption -EditMode Emacs -HistorySearchCursorMovesToEnd
+
+$keybindings = @{
+    'Ctrl+w'          = 'BackwardDeleteWord'
+    'Ctrl+Backspace'  = 'BackwardDeleteWord'
+    'Ctrl+LeftArrow'  = 'BackwardWord'
+    'Ctrl+RightArrow' = 'ForwardWord'
+    'Tab'             = 'MenuComplete'
+    'DownArrow'       = 'HistorySearchForward'
+    'UpArrow'         = 'HistorySearchBackward'
+}
+
+$keybindings.GetEnumerator() | ForEach-Object {
+    Set-PSReadLineKeyHandler -Key $_.Key -Function $_.Value
+}
+
+# Alt+c for quick directory change
 Set-PSReadLineKeyHandler -Key Alt+c -ScriptBlock {
     [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert('cdf')
@@ -160,13 +202,13 @@ Set-PSReadLineKeyHandler -Key Alt+c -ScriptBlock {
 }
 
 # SCOOP-SEARCH INTEGRATION ----------------------------------------------------
-if (Test-CommandExists "scoop") {
-    if (-not (Test-CommandExists "scoop-search")) {
+if (Test-CommandExists scoop) {
+    if (-not (Test-CommandExists scoop-search)) {
         scoop install scoop-search
     }
 
     function scoop {
-        if ($args[0] -eq "search") {
+        if ($args[0] -eq 'search') {
             scoop-search.exe @($args | Select-Object -Skip 1)
         }
         else {
@@ -175,41 +217,32 @@ if (Test-CommandExists "scoop") {
     }
 }
 
-# STARSHIP --------------------------------------------------------------------
-if (Test-CommandExists "starship") {
+# STARSHIP PROMPT -------------------------------------------------------------
+if (Test-CommandExists starship) {
     function Invoke-Starship-PreCommand {
-        # Set the window title
-        $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace("$HOME", "~")
+        # Set window title
+        $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace($HOME, '~')
 
-        # Add a newline when needed
+        # Add newline only when needed
         if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
             Write-Host
         }
 
-        # Support Windows Terminal tab/pane duplication
+        # Windows Terminal tab/pane duplication support
         if ($env:WT_SESSION) {
-            $current_location = $executionContext.SessionState.Path.CurrentLocation
+            $loc = $executionContext.SessionState.Path.CurrentLocation
             $prompt = "`e]9;12`a"
-            if ($current_location.Provider.Name -eq "FileSystem") {
-                $prompt += "`e]9;9;`"$($current_location.ProviderPath)`"`e\"
+            if ($loc.Provider.Name -eq 'FileSystem') {
+                $prompt += "`e]9;9;`"$($loc.ProviderPath)`"`e\"
             }
             $Host.UI.Write($prompt)
         }
     }
 
-    # Environmental variables
-    $env:STARSHIP_CONFIG = "$PROFILE_DIR/starship.toml"
-    if ($IsWindows) {
-        $env:STARSHIP_CACHE = "$HOME\AppData\Local\Temp\starship"
-    }
+    $env:STARSHIP_CONFIG = Join-Path $PROFILE_DIR 'starship.toml'
+    $env:STARSHIP_CACHE = Join-Path $CACHE_DIR 'starship'
 
-    # Create Starship start script if it doesn't exist
-    if (-not (Test-Path -Path "$env:STARSHIP_CACHE/Start-Starship.ps1" -PathType Leaf)) {
-        New-Item -ItemType Directory -Force $env:STARSHIP_CACHE | Out-Null
-        starship completions power-shell >"$env:STARSHIP_CACHE/Start-Starship.ps1"
-        starship init powershell --print-full-init >>"$env:STARSHIP_CACHE/Start-Starship.ps1"
+    New-CachedScript -Name 'Starship' -CacheSubDir 'starship' -Generator {
+        starship init powershell --print-full-init
     }
-
-    # Start Starship
-    . "$env:STARSHIP_CACHE/Start-Starship.ps1"
 }
