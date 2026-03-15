@@ -12,8 +12,6 @@ style = 'white'
 
 [directory]
 read_only = ' 󰌾'
-repo_root_style = 'bold bright-cyan'
-style = 'cyan'
 truncate_to_repo = false
 truncation_length = 0
 
