@@ -92,7 +92,6 @@ $env:FZF_DEFAULT_OPTS = @(
 
 # ALIASES & FUNCTIONS ---------------------------------------------------------
 Set-Alias -Name touch -Value New-Item
-Set-Alias -Name unzip -Value Expand-Archive
 
 function which {
     [CmdletBinding()]
@@ -111,33 +110,6 @@ function which {
     }
 }
 
-function .. {
-    Set-Location ..
-}
-
-# EZA integration (modern ls replacement)
-if (Test-CommandExists eza) {
-    Remove-Item -Path Alias:ls -ErrorAction SilentlyContinue
-
-    $ezaDefaults = @('--icons', '--group-directories-first')
-
-    function ls {
-        & eza @ezaDefaults @args
-    }
-    function ll {
-        & eza @ezaDefaults --git -lh @args
-    }
-    function lt {
-        & eza @ezaDefaults --git -T -L 3 @args
-    }
-    function la {
-        & eza @ezaDefaults -a @args
-    }
-    function lla {
-        & eza @ezaDefaults --git -lha @args
-    }
-}
-
 # LazyGit alias
 if (Test-CommandExists lazygit) {
     Set-Alias -Name lg -Value lazygit
@@ -145,10 +117,6 @@ if (Test-CommandExists lazygit) {
 
 # Interactive directory navigation with fzf + fd
 function cdf {
-    $previewCmd = if ((Get-Host).UI.RawUI.MaxWindowSize.Width -gt 80) {
-        'eza --tree --color=always --level=3 --icons=always {}'
-    }
-
     $excludes = @(
         '.bun',
         '.cache',
