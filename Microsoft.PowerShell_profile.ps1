@@ -68,26 +68,25 @@ $env:LS_COLORS = 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 # FZF theme
 $env:FZF_DEFAULT_OPTS = @(
-    '--ansi',
     '--highlight-line',
-    '--info=inline-right',
-    '--color=bg+:#283457',
-    '--color=bg:#16161e',
-    '--color=border:#27a1b9',
-    '--color=fg:#c0caf5',
-    '--color=fg+:#c0caf5',
-    '--color=gutter:#16161e',
-    '--color=header:#ff9e64',
-    '--color=hl+:#2ac3de',
-    '--color=hl:#2ac3de',
-    '--color=info:#545c7e',
-    '--color=marker:#ff007c',
-    '--color=pointer:#ff007c',
-    '--color=prompt:#2ac3de',
-    '--color=query:#c0caf5:regular',
-    '--color=scrollbar:#27a1b9',
-    '--color=separator:#ff9e64',
-    '--color=spinner:#ff007c'
+    '--color=fg:#cdcbdd',
+    '--color=bg:#181624',
+    '--color=gutter:#181624',
+    '--color=border:#52abcf',
+    '--color=separator:#52abcf',
+    '--color=scrollbar:#625f7e',
+    '--color=hl:#e97294',
+    '--color=hl+:#e97294',
+    '--color=fg+:#cdcbdd',
+    '--color=bg+:#2b3b51',
+    '--color=pointer:#e9b5b3',
+    '--color=prompt:#e9b5b3',
+    '--color=spinner:#e9b5b3',
+    '--color=marker:#e9b5b3',
+    '--color=header:#52abcf',
+    '--color=info:#8e8aac',
+    '--color=preview-border:#52abcf',
+    '--color=preview-scrollbar:#625f7e'
 ) -join ' '
 
 # ALIASES & FUNCTIONS ---------------------------------------------------------
@@ -118,6 +117,7 @@ if (Test-CommandExists lazygit) {
 # Interactive directory navigation with fzf + fd
 function cdf {
     $excludes = @(
+        '.affinity',
         '.bun',
         '.cache',
         '.git',
@@ -133,10 +133,7 @@ function cdf {
         '--cycle',
         '--prompt=Go to> ',
         '--scheme=path',
-        '--layout=reverse',
-        '--border=rounded',
-        '--preview-border=rounded'
-        "--preview=$previewCmd"
+        '--layout=reverse'
     )
 
     $dir = & fd --type directory -H @excludes | & fzf @fzfArgs
