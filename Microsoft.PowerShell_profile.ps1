@@ -1,5 +1,4 @@
 #Requires -Version 7
-
 # VARIABLES -------------------------------------------------------------------
 $PROFILE_DIR = Split-Path -Path $PROFILE
 $CACHE_DIR = if ($IsWindows) {
