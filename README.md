@@ -13,7 +13,7 @@ intuitive, and full of handy features.
 ## 🚀 Features That Shine
 
 - **Bash-like Keyboard Shortcuts**: Work faster with familiar shortcuts.
-- **Enhanced Syntax Highlighting**: Better readability with vibrant colors.
+- **Enhanced Syntax Highlighting**: Better readability and defaults.
 - **Modern, Fast Prompt**: Powered by [Starship](https://starship.rs), for a
   sleek and responsive shell experience.
 - **Windows Terminal Integration**: Seamlessly duplicate tabs and panes.
@@ -38,8 +38,6 @@ To unlock additional functionality, consider installing:
 
 - **[Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)**: A
 blazing-fast, highly customizable prompt.
-- **[Eza](https://eza.rocks/)**: A modern, maintained replacement for the
-venerable file-listing command-line program `ls`.
 - **[fd](https://github.com/sharkdp/fd)** and
 **[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
 
