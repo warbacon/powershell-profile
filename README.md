@@ -38,7 +38,6 @@ To unlock additional functionality, consider installing:
 
 - **[Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)**: A
 blazing-fast, highly customizable prompt.
-- **[fd](https://github.com/sharkdp/fd)** and
 **[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
 
 ## 📦 Installation Guide

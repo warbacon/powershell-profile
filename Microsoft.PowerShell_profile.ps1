@@ -113,31 +113,36 @@ if (Test-CommandExists lazygit) {
     Set-Alias -Name lg -Value lazygit
 }
 
-# Interactive directory navigation with fzf + fd
+# Interactive directory navigation with fzf
 function cdf {
-    $excludes = @(
+    $excludeDirs = @(
         '.affinity',
         '.bun',
         '.cache',
+        '.dotnet',
         '.git',
+        '.gradle',
+        '.nuget',
         '.vscode',
         'go',
         'node_modules',
         'scoop',
         'vendor'
-    ) | ForEach-Object { @('--exclude', $_) }
+    )
 
     $fzfArgs = @(
         '--height=50%',
         '--cycle',
         '--prompt=Go to> ',
         '--scheme=path',
-        '--layout=reverse'
+        '--layout=reverse',
+        '--walker=dir,hidden',
+        "--walker-skip=$($excludeDirs -join ',')"
     )
 
-    $dir = & fd --type directory -H @excludes | & fzf @fzfArgs
-    if ($dir) {
-        Set-Location $dir
+    $dir = & fzf @fzfArgs
+    if ($LASTEXITCODE -eq 0 -and $dir) {
+        Set-Location -LiteralPath $dir
     }
 }
 
@@ -190,9 +195,9 @@ if (Test-CommandExists starship) {
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace($HOME, '~')
 
         # Add newline only when needed
-        if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
-            Write-Host
-        }
+        # if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
+        #     Write-Host
+        # }
 
         # Windows Terminal tab/pane duplication support
         if ($env:WT_SESSION) {
