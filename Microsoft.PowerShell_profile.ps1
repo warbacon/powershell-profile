@@ -89,28 +89,39 @@ $env:FZF_DEFAULT_OPTS = @(
 ) -join ' '
 
 # ALIASES & FUNCTIONS ---------------------------------------------------------
-Set-Alias -Name touch -Value New-Item
-
-function which {
-    [CmdletBinding()]
-    param(
-        [Parameter(Position = 0, Mandatory)]
-        [ValidateNotNullOrEmpty()]
-        [string]$ProgramName
-    )
-
-    try {
-        $cmd = Get-Command -Name $ProgramName -ErrorAction Stop -CommandType Application
-        return $cmd.Source
-    }
-    catch {
-        Write-Error "$ProgramName is not a program."
-    }
-}
+Set-Alias -Name which -Value where.exe
 
 # LazyGit alias
 if (Test-CommandExists lazygit) {
     Set-Alias -Name lg -Value lazygit
+}
+
+# Coreutils
+if (Test-CommandExists rm.exe) {
+    Set-Alias -Name rm -Value rm.exe
+}
+if (Test-CommandExists cp.exe) {
+    Remove-Alias cp
+    Set-Alias -Name cp -Value cp.exe
+}
+if (Test-CommandExists mv.exe) {
+    Remove-Alias mv
+    Set-Alias -Name mv -Value mv.exe -Force
+}
+if (Test-CommandExists mkdir.exe) {
+    Set-Alias -Name mkdir -Value mkdir.exe -Force
+}
+if (Test-CommandExists ls.exe) {
+    Remove-Alias ls
+    function ls() {
+        ls.exe --color --group-directories-first -vF $args
+    }
+    function ll() {
+        ls.exe --color --group-directories-first -vFlh $args
+    }
+    function la() {
+        ls.exe --color --group-directories-first -vFlhA $args
+    }
 }
 
 # Interactive directory navigation with fzf

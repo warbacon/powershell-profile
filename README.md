@@ -37,8 +37,10 @@ intuitive, and full of handy features.
 To unlock additional functionality, consider installing:
 
 - **[Starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)**: A
-blazing-fast, highly customizable prompt.
-**[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
+  blazing-fast, highly customizable prompt.
+- **[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
+- **[Coreutils for Windows](https://github.com/microsoft/coreutils)**: For
+  having UNIX-style core utilities. Replaces `ls`, `cp`, `mv` and `rm` commands.
 
 ## 📦 Installation Guide
 
