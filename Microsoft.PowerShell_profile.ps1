@@ -44,9 +44,13 @@ function New-CachedScript {
 
 # Set default editor
 $env:EDITOR = @(
-    'nvim',
-    'code'
-) | Where-Object { Test-CommandExists $_ } | Select-Object -First 1
+    @( 'nvim' ),
+    @('zed', '--wait'),
+    @('code', '--wait'),
+    @( 'nano' )
+    @( 'vim' )
+    @( 'vi' )
+) | Where-Object { Test-CommandExists $_[0] } | Select-Object -First 1
 
 # Get public IP (uses ipify.org API)
 function Get-PubIP {
