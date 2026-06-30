@@ -7,6 +7,7 @@ $CACHE_DIR = if ($IsWindows) {
 else {
     "$HOME/.cache"
 }
+$WT_CONFIG = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
 # UTILITY FUNCTIONS -----------------------------------------------------------
 function Test-CommandExists {
