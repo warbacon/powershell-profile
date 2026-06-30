@@ -212,9 +212,9 @@ if (Test-CommandExists starship) {
         $Host.UI.RawUI.WindowTitle = $PWD.Path.Replace($HOME, '~')
 
         # Add newline only when needed
-        if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
-            Write-Host
-        }
+        # if ($Host.UI.RawUI.CursorPosition.Y -ne 0) {
+        #     Write-Host
+        # }
 
         # Windows Terminal tab/pane duplication support
         if ($env:WT_SESSION) {

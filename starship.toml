@@ -1,32 +1,23 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = '$username$shell$directory$git_branch$git_commit$git_status$jobs$line_break$status$character'
+format = "$shell$username$directory$git_branch$git_commit$git_status$cmd_duration$character"
 
 [shell]
 disabled = false
-nu_indicator = '󰞷'
-powershell_indicator = '󰨊'
+powershell_indicator = ' pwsh'
 style = 'white'
 
+[username]
+format = '[$user]($style) '
+
 [directory]
-read_only = ' 󰌾'
-truncate_to_repo = false
-truncation_length = 0
+format = '[$read_only]($read_only_style)[$path]($style) '
+read_only = '󰌾 '
 
 [git_branch]
-format = '[\($branch\)]($style) '
+format = '[\($branch\)](bold purple) '
 
-[git_commit]
-tag_disabled = false
-tag_symbol = ' • '
-
-[status]
-disabled = false
-format = '[$status]($style) '
-
-[character]
-error_symbol = '[>](bold red)'
-success_symbol = '[>](bold yellow)'
-vimcmd_symbol = '[>](bold yellow)'
+[cmd_duration]
+min_time = 3_000
+format = '[$duration]($style) '
