@@ -165,14 +165,15 @@ function cdf {
 Set-PSReadLineOption -EditMode Emacs -HistorySearchCursorMovesToEnd
 
 $keybindings = @{
+    'Alt+e'           = 'ViEditVisually'
+    'Ctrl+w'          = 'BackwardDeleteWord'
+    'Ctrl+Backspace'  = 'BackwardDeleteWord'
     'Alt+LeftArrow'   = 'BackwardWord'
     'Alt+RightArrow'  = 'ForwardWord'
     'Ctrl+LeftArrow'  = 'BackwardWord'
     'Ctrl+RightArrow' = 'ForwardWord'
-    'Ctrl+Backspace'  = 'BackwardDeleteWord'
-    'Ctrl+w'          = 'BackwardDeleteWord'
-    'UpArrow'         = 'HistorySearchBackward'
     'DownArrow'       = 'HistorySearchForward'
+    'UpArrow'         = 'HistorySearchBackward'
     'Tab'             = 'MenuComplete'
 }
 
