@@ -40,7 +40,7 @@ To unlock additional functionality, consider installing:
   blazing-fast, highly customizable prompt.
 - **[fzf](https://github.com/junegunn/fzf)**: Required for the `cdf` command.
 - **[Coreutils for Windows](https://github.com/microsoft/coreutils)**: For
-  having UNIX-style core utilities. Replaces `ls`, `cp`, `mv` and `rm` commands.
+having UNIX-style core utilities.
 
 ## 📦 Installation Guide
 
